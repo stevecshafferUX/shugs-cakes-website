@@ -1,0 +1,170 @@
+.home-page {
+  min-height: calc(100vh - 200px);
+}
+
+.hero {
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.about-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.about-content h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #2f2e2e;
+}
+
+.about-text {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #2f2e2e;
+}
+
+.cta-section {
+  background-color: #fff0f6;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2f2e2e;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #2f2e2e;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 2px solid #ff69b4;
+  background-color: white;
+  color: #ff69b4;
+}
+
+.cta-button.primary {
+  background-color: #ff69b4;
+  color: white;
+}
+
+.cta-button.secondary {
+  background-color: #2f2e2e;
+  border-color: #2f2e2e;
+  color: white;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary:hover {
+  background-color: #ff1493;
+  border-color: #ff1493;
+}
+
+.cta-button.secondary:hover {
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+.info-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.info-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.info-card h3 {
+  color: #ff69b4;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-card p {
+  color: #2f2e2e;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+
+  .about-content h2,
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

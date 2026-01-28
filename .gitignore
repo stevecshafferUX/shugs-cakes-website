@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# environment variables
+.env
+.env.local
+.env.*.local
+
+# editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# zip archives
+*.zip
+
+# large binary files
+*.dmg
+*.exe
+*.msi
+
+# Cake Pics source folder (images are copied to public/gallery/)
+Cake Pics/
