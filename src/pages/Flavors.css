@@ -1,22 +1,29 @@
 .flavors-page {
   min-height: calc(100vh - 200px);
+  background-color: #f5efe8;
 }
 
 .flavors-header {
-  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-  color: white;
+  background: linear-gradient(135deg, #8b5e3c 0%, #6b3f2a 100%);
+  color: #f5efe8;
   padding: 3rem 2rem;
   text-align: center;
+  border-bottom: 3px solid #c4a882;
 }
 
 .flavors-header h1 {
+  font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  color: #f5efe8;
 }
 
 .flavors-header p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 0;
+  color: #e8d5c0;
+  font-style: italic;
 }
 
 .flavors-container {
@@ -31,11 +38,11 @@
 }
 
 .flavors-intro p {
-  font-size: 1.1rem;
-  color: #2f2e2e;
+  font-size: 1.05rem;
+  color: #5c4033;
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .flavor-section {
@@ -43,16 +50,27 @@
 }
 
 .flavor-section h2 {
-  color: #ff69b4;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  color: #6b3f2a;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
   text-align: center;
+  font-weight: 700;
+}
+
+.flavor-section h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: #c4a882;
+  margin: 0.5rem auto 1.5rem;
 }
 
 .section-note {
   text-align: center;
   font-style: italic;
-  color: #666;
+  color: #8b7355;
   margin-bottom: 2rem;
 }
 
@@ -63,29 +81,32 @@
 }
 
 .flavor-card {
-  background-color: white;
+  background-color: #faf6f0;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #ff69b4;
+  box-shadow: 0 2px 8px rgba(107, 63, 42, 0.1);
+  border: 1px solid #e0d4c4;
+  border-left: 4px solid #8b5e3c;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .flavor-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(107, 63, 42, 0.18);
 }
 
 .flavor-card h3 {
-  color: #2f2e2e;
-  font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  color: #5c4033;
+  font-size: 1.15rem;
   margin: 0 0 0.5rem 0;
+  font-weight: 600;
 }
 
 .flavor-card p {
-  color: #666;
+  color: #7a6350;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
   font-size: 0.95rem;
 }
 
@@ -96,14 +117,15 @@
 }
 
 .filling-item {
-  background-color: white;
+  background-color: #faf6f0;
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(107, 63, 42, 0.1);
   text-align: center;
   font-weight: 500;
-  color: #2f2e2e;
-  border-top: 3px solid #ff69b4;
+  color: #5c4033;
+  border: 1px solid #e0d4c4;
+  border-top: 3px solid #8b5e3c;
   transition: transform 0.3s ease;
 }
 
@@ -112,17 +134,20 @@
 }
 
 .popular-combos {
-  background: linear-gradient(135deg, #fff0f6 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #ede4d7 0%, #f5efe8 100%);
   padding: 3rem;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 3rem;
+  border: 1px solid #e0d4c4;
 }
 
 .popular-combos h2 {
-  color: #2f2e2e;
-  font-size: 2rem;
+  font-family: 'Playfair Display', serif;
+  color: #6b3f2a;
+  font-size: 1.8rem;
   margin-bottom: 2rem;
   text-align: center;
+  font-weight: 700;
 }
 
 .combo-grid {
@@ -132,48 +157,54 @@
 }
 
 .combo-card {
-  background-color: white;
+  background-color: #faf6f0;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #ff69b4;
+  box-shadow: 0 2px 8px rgba(107, 63, 42, 0.1);
+  border: 1px solid #e0d4c4;
+  border-top: 4px solid #8b5e3c;
 }
 
 .combo-card h3 {
-  color: #ff69b4;
-  font-size: 1.3rem;
+  font-family: 'Playfair Display', serif;
+  color: #6b3f2a;
+  font-size: 1.2rem;
   margin: 0 0 1rem 0;
   text-align: center;
+  font-weight: 700;
 }
 
 .combo-card p {
-  color: #2f2e2e;
+  color: #5c4033;
   margin: 0.5rem 0;
   line-height: 1.6;
 }
 
 .combo-card strong {
-  color: #2f2e2e;
+  color: #5c4033;
 }
 
 .flavors-note {
-  background-color: #2f2e2e;
-  color: white;
+  background-color: #6b3f2a;
+  color: #f5efe8;
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
 }
 
 .flavors-note h3 {
+  font-family: 'Playfair Display', serif;
   margin: 0 0 1rem 0;
-  color: #ff69b4;
-  font-size: 1.5rem;
+  color: #e8d5c0;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .flavors-note p {
   margin: 0;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #e8d5c0;
 }
 
 @media (max-width: 768px) {

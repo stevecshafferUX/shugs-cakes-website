@@ -16,10 +16,10 @@ function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b-2 border-amber-800/30 bg-amber-50/95 backdrop-blur supports-[backdrop-filter]:bg-amber-50/80 shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-2">
-          <h1 className="text-2xl font-bold text-primary">Shug's Cakes</h1>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: "'Great Vibes', cursive", color: '#7c4a3a' }}>Shug's Cakes</h1>
         </Link>
 
         {/* Mobile menu button */}
@@ -39,13 +39,13 @@ function Header() {
         <nav className="hidden md:flex items-center space-x-6">
           <Link
             to="/"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
           >
             Welcome
           </Link>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary">
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium transition-colors text-amber-900 hover:text-amber-700">
               Cake Gallery
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
@@ -120,28 +120,28 @@ function Header() {
 
           <Link
             to="/pricing"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
           >
             Pricing
           </Link>
 
           <Link
             to="/flavors"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
           >
             Cake Flavors
           </Link>
 
           <Link
             to="/contact"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
           >
             Contact
           </Link>
 
           <Link
             to="/order"
-            className="text-sm font-medium text-primary-foreground bg-primary px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+            className="text-sm font-medium text-amber-50 bg-amber-800 px-4 py-2 rounded-md hover:bg-amber-900 transition-colors"
           >
             Order Form
           </Link>
@@ -183,106 +183,106 @@ function Header() {
 
         {/* Mobile navigation */}
         {mobileMenuOpen && (
-          <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
+          <div className="absolute top-16 left-0 right-0 bg-amber-50 border-b border-amber-800/30 md:hidden">
             <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
               <Link
                 to="/"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Welcome
               </Link>
 
               <div className="space-y-2">
-                <p className="text-sm font-medium text-muted-foreground">Cake Gallery</p>
+                <p className="text-sm font-medium text-amber-800">Cake Gallery</p>
                 <div className="pl-4 space-y-2">
                   <Link
                     to="/gallery/birthdays"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Birthday Cakes
                   </Link>
                   <Link
                     to="/gallery/kids-birthday"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Kids Birthday Cakes
                   </Link>
                   <Link
                     to="/gallery/first-birthday"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     1st Birthday Cakes
                   </Link>
                   <Link
                     to="/gallery/smash-cakes"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Smash Cakes
                   </Link>
                   <Link
                     to="/gallery/graduation"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Graduation Cakes
                   </Link>
                   <Link
                     to="/gallery/bridal-shower"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Bridal Shower & Engagement
                   </Link>
                   <Link
                     to="/gallery/anniversary"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Anniversary Cakes
                   </Link>
                   <Link
                     to="/gallery/religious"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Religious Cakes
                   </Link>
                   <Link
                     to="/gallery/holiday"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Holiday Cakes
                   </Link>
                   <Link
                     to="/gallery/fun-cakes"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Fun Cakes
                   </Link>
                   <Link
                     to="/gallery/3d-cakes"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     3D Cakes
                   </Link>
                   <Link
                     to="/gallery/cupcakes"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Cupcakes
                   </Link>
                   <Link
                     to="/gallery/cookies"
-                    className="block text-sm transition-colors hover:text-primary"
+                    className="block text-sm transition-colors text-amber-900 hover:text-amber-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Cookies
@@ -292,7 +292,7 @@ function Header() {
 
               <Link
                 to="/pricing"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Pricing
@@ -300,7 +300,7 @@ function Header() {
 
               <Link
                 to="/flavors"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Cake Flavors
@@ -308,7 +308,7 @@ function Header() {
 
               <Link
                 to="/contact"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors text-amber-900 hover:text-amber-700"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
@@ -347,7 +347,7 @@ function Header() {
                       signOut();
                       setMobileMenuOpen(false);
                     }}
-                    className="text-sm text-destructive hover:text-destructive/90 flex items-center gap-2 pl-4"
+                    className="text-sm text-red-700 hover:text-red-900 flex items-center gap-2 pl-4"
                   >
                     <LogOut className="h-4 w-4" />
                     Sign Out
