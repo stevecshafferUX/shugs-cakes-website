@@ -1,18 +1,79 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { Cake, Cookie, Dessert, Square, Circle, Layers, RectangleHorizontal, Star, Candy, CakeSlice, HelpCircle } from 'lucide-react';
+import { Cake, Cookie, Dessert, Square, Circle, Layers, RectangleHorizontal, Star, Candy, CakeSlice, HelpCircle, ImageUp, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 
+const MAX_IMAGES = 5;
+const MAX_FILE_SIZE_MB = 5;
+const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
 function OrderForm() {
   const { user } = useAuth();
   const [submitting, setSubmitting] = useState(false);
+  const [images, setImages] = useState([]); // { file, preview }
+  const fileInputRef = useRef(null);
+
+  const validateAndAddFiles = (files) => {
+    const current = images.length;
+    const remaining = MAX_IMAGES - current;
+    if (remaining <= 0) {
+      toast.warning(`You can attach up to ${MAX_IMAGES} images.`);
+      return;
+    }
+
+    const accepted = [];
+    for (const file of Array.from(files).slice(0, remaining)) {
+      if (!ACCEPTED_TYPES.includes(file.type)) {
+        toast.warning(`"${file.name}" is not a supported image type. Use JPG, PNG, GIF, or WebP.`);
+        continue;
+      }
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast.warning(`"${file.name}" is too large. Each image must be under ${MAX_FILE_SIZE_MB} MB.`);
+        continue;
+      }
+      accepted.push({ file, preview: URL.createObjectURL(file) });
+    }
+
+    if (accepted.length > 0) {
+      setImages(prev => [...prev, ...accepted]);
+    }
+    if (Array.from(files).length > remaining) {
+      toast.warning(`Only ${remaining} more image(s) can be added (max ${MAX_IMAGES}).`);
+    }
+  };
+
+  const removeImage = (index) => {
+    setImages(prev => {
+      URL.revokeObjectURL(prev[index].preview);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    validateAndAddFiles(e.dataTransfer.files);
+  };
+
+  const uploadImages = async () => {
+    const urls = [];
+    for (const { file } of images) {
+      const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('order-images')
+        .upload(path, file, { cacheControl: '3600', upsert: false });
+      if (error) throw new Error(`Failed to upload "${file.name}": ${error.message}`);
+      const { data: { publicUrl } } = supabase.storage.from('order-images').getPublicUrl(data.path);
+      urls.push(publicUrl);
+    }
+    return urls;
+  };
 
   const [formData, setFormData] = useState({
     name: user?.user_metadata?.full_name || '',
@@ -80,6 +141,9 @@ function OrderForm() {
     setSubmitting(true);
 
     try {
+      // Upload any attached images first
+      const imageUrls = images.length > 0 ? await uploadImages() : [];
+
       // Prepare order data
       const orderData = {
         user_id: user?.id || null,
@@ -93,6 +157,7 @@ function OrderForm() {
         order_type: formData.orderType,
         cake_type: formData.cakeType,
         details: formData.details,
+        image_urls: imageUrls,
         status: 'pending',
       };
 
@@ -118,6 +183,8 @@ function OrderForm() {
         cakeType: { sheet: false, round: false, tiered: false, square: false, shaped: false, smash: false, other: false },
         details: ''
       });
+      images.forEach(({ preview }) => URL.revokeObjectURL(preview));
+      setImages([]);
     } catch (error) {
       console.error('Error submitting order:', error);
 
@@ -334,6 +401,66 @@ function OrderForm() {
                     placeholder="Include details such as:&#10;• Flavors (cake, frosting, filling)&#10;• Colors and design preferences&#10;• Text or writing on the cake&#10;• Decorations or special requests&#10;• Dietary restrictions or allergies&#10;• Any reference images or inspiration"
                   />
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Reference Images */}
+            <Card>
+              <CardContent className="pt-6 space-y-4">
+                <h2 className="text-2xl font-semibold mb-1">Reference Images</h2>
+                <p className="text-sm text-muted-foreground">
+                  Upload up to {MAX_IMAGES} images for design inspiration or examples (JPG, PNG, GIF, WebP — max {MAX_FILE_SIZE_MB} MB each)
+                </p>
+
+                {/* Drop zone */}
+                <div
+                  onDrop={handleDrop}
+                  onDragOver={(e) => e.preventDefault()}
+                  onClick={() => fileInputRef.current?.click()}
+                  className={cn(
+                    "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors hover:border-primary/50 hover:bg-primary/5",
+                    images.length >= MAX_IMAGES && "opacity-50 pointer-events-none"
+                  )}
+                >
+                  <ImageUp className="h-10 w-10 mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-sm font-medium">Drag & drop images here, or click to browse</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {images.length}/{MAX_IMAGES} image(s) added
+                  </p>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    accept="image/jpeg,image/png,image/gif,image/webp"
+                    className="hidden"
+                    onChange={(e) => {
+                      validateAndAddFiles(e.target.files);
+                      e.target.value = '';
+                    }}
+                  />
+                </div>
+
+                {/* Previews */}
+                {images.length > 0 && (
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                    {images.map(({ preview }, index) => (
+                      <div key={index} className="relative group aspect-square">
+                        <img
+                          src={preview}
+                          alt={`Reference ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg border"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index)}
+                          className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
         </div>

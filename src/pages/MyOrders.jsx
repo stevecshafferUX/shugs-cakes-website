@@ -222,6 +222,25 @@ function MyOrders() {
                       <p className="text-sm text-muted-foreground">{order.details}</p>
                     </div>
                   )}
+
+                  {order.image_urls?.length > 0 && (
+                    <div className="mt-4 pt-4 border-t">
+                      <h3 className="font-semibold mb-2">Attached Images</h3>
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                        {order.image_urls.map((url, index) => (
+                          <a
+                            key={index}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block aspect-square overflow-hidden rounded-lg border hover:opacity-80 transition-opacity"
+                          >
+                            <img src={url} alt={`Reference image ${index + 1}`} className="w-full h-full object-cover" />
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
