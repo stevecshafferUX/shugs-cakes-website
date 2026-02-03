@@ -1,7 +1,85 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { pricingApi } from '@/api/pricing';
 import './Pricing.css';
 
 function Pricing() {
+  const [products, setProducts] = useState([]);
+  const [cakeTypes, setCakeTypes] = useState([]);
+  const [flavors, setFlavors] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchPricingData();
+  }, []);
+
+  const fetchPricingData = async () => {
+    try {
+      const [productsData, cakeTypesData, flavorsData, categoriesData] = await Promise.all([
+        pricingApi.getActiveProducts(),
+        pricingApi.getActiveCakeTypes(),
+        pricingApi.getActiveFlavors(),
+        pricingApi.getCategories(),
+      ]);
+
+      setProducts(productsData);
+      setCakeTypes(cakeTypesData);
+      setFlavors(flavorsData);
+      setCategories(categoriesData.filter(c => c.is_active));
+    } catch (err) {
+      console.error('Error fetching pricing data:', err);
+      setError('Unable to load pricing information.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatPrice = (price) => {
+    if (price === null || price === undefined) return 'Custom Quote';
+    const num = parseFloat(price);
+    if (num === 0) return 'Included';
+    return `$${num.toFixed(2)}`;
+  };
+
+  // Group products by category
+  const productsByCategory = categories.reduce((acc, category) => {
+    const categoryProducts = products.filter(p => p.category_id === category.id);
+    if (categoryProducts.length > 0) {
+      acc.push({ ...category, products: categoryProducts });
+    }
+    return acc;
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pricing-page">
+        <div className="pricing-header">
+          <h1>Pricing</h1>
+          <p>Custom cakes made with love</p>
+        </div>
+        <div className="pricing-container">
+          <div className="pricing-loading">Loading pricing information...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pricing-page">
+        <div className="pricing-header">
+          <h1>Pricing</h1>
+          <p>Custom cakes made with love</p>
+        </div>
+        <div className="pricing-container">
+          <div className="pricing-error">{error}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pricing-page">
       <div className="pricing-header">
@@ -18,114 +96,88 @@ function Pricing() {
         </div>
 
         <div className="pricing-grid">
-          <div className="pricing-card">
-            <h3>Sheet Cakes</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>Quarter Sheet (serves 12-15)</span>
-                <span className="price">Starting at $45</span>
-              </div>
-              <div className="price-row">
-                <span>Half Sheet (serves 24-30)</span>
-                <span className="price">Starting at $75</span>
-              </div>
-              <div className="price-row">
-                <span>Full Sheet (serves 48-60)</span>
-                <span className="price">Starting at $135</span>
+          {/* Products by Category */}
+          {productsByCategory.map((category) => (
+            <div className="pricing-card" key={category.id}>
+              <h3>{category.name}</h3>
+              {category.description && (
+                <p className="category-description">{category.description}</p>
+              )}
+              <div className="price-details">
+                {category.products.map((product) => (
+                  <div className="price-row" key={product.id}>
+                    <div className="price-item-info">
+                      <span className="price-item-name">{product.name}</span>
+                      {product.description && (
+                        <span className="price-item-desc">{product.description}</span>
+                      )}
+                      {product.min_servings && (
+                        <span className="price-item-servings">
+                          Serves {product.min_servings}
+                          {product.max_servings ? `–${product.max_servings}` : '+'}
+                        </span>
+                      )}
+                    </div>
+                    <span className="price">
+                      {product.base_price > 0
+                        ? `Starting at ${formatPrice(product.base_price)}`
+                        : 'Custom Quote'}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          ))}
 
-          <div className="pricing-card">
-            <h3>Round Cakes</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>6" (serves 8-10)</span>
-                <span className="price">Starting at $40</span>
-              </div>
-              <div className="price-row">
-                <span>8" (serves 12-16)</span>
-                <span className="price">Starting at $55</span>
-              </div>
-              <div className="price-row">
-                <span>10" (serves 20-25)</span>
-                <span className="price">Starting at $75</span>
-              </div>
-              <div className="price-row">
-                <span>12" (serves 30-35)</span>
-                <span className="price">Starting at $95</span>
+          {/* Cake Types */}
+          {cakeTypes.length > 0 && (
+            <div className="pricing-card">
+              <h3>Cake Types</h3>
+              <div className="price-details">
+                {cakeTypes.map((type) => (
+                  <div className="price-row" key={type.id}>
+                    <div className="price-item-info">
+                      <span className="price-item-name">{type.name}</span>
+                      {type.description && (
+                        <span className="price-item-desc">{type.description}</span>
+                      )}
+                    </div>
+                    <span className="price">
+                      {type.price_modifier > 0
+                        ? `+${formatPrice(type.price_modifier)}`
+                        : type.price_modifier < 0
+                        ? `-${formatPrice(Math.abs(type.price_modifier))}`
+                        : 'Base Price'}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="pricing-card">
-            <h3>Tiered Cakes</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>2-Tier (6" + 8")</span>
-                <span className="price">Starting at $95</span>
-              </div>
-              <div className="price-row">
-                <span>2-Tier (8" + 10")</span>
-                <span className="price">Starting at $130</span>
-              </div>
-              <div className="price-row">
-                <span>3-Tier (6" + 8" + 10")</span>
-                <span className="price">Starting at $170</span>
-              </div>
-            </div>
-            <p className="note">Custom tiered cakes available - contact for quote</p>
-          </div>
-
-          <div className="pricing-card">
-            <h3>Cupcakes</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>Standard (per dozen)</span>
-                <span className="price">$30</span>
-              </div>
-              <div className="price-row">
-                <span>Custom Decorated (per dozen)</span>
-                <span className="price">$36+</span>
+          {/* Flavors with price modifiers */}
+          {flavors.length > 0 && (
+            <div className="pricing-card featured">
+              <h3>Flavors</h3>
+              <div className="price-details">
+                {flavors.map((flavor) => (
+                  <div className="price-row" key={flavor.id}>
+                    <div className="price-item-info">
+                      <span className="price-item-name">{flavor.name}</span>
+                      {flavor.description && (
+                        <span className="price-item-desc">{flavor.description}</span>
+                      )}
+                    </div>
+                    <span className="price">
+                      {flavor.price_modifier > 0
+                        ? `+${formatPrice(flavor.price_modifier)}`
+                        : 'Included'}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-
-          <div className="pricing-card">
-            <h3>Specialty Items</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>Cookies (per dozen)</span>
-                <span className="price">$30+</span>
-              </div>
-              <div className="price-row">
-                <span>Smash Cakes</span>
-                <span className="price">$35+</span>
-              </div>
-              <div className="price-row">
-                <span>Shaped/Sculpted Cakes</span>
-                <span className="price">Custom Quote</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="pricing-card featured">
-            <h3>Additional Services</h3>
-            <div className="price-details">
-              <div className="price-row">
-                <span>Edible Images</span>
-                <span className="price">+$15</span>
-              </div>
-              <div className="price-row">
-                <span>Custom Toppers</span>
-                <span className="price">+$10+</span>
-              </div>
-              <div className="price-row">
-                <span>Premium Decorations</span>
-                <span className="price">Varies</span>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
 
         <div className="pricing-notes">

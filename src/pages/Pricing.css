@@ -84,10 +84,54 @@
   color: #2f2e2e;
 }
 
+.price-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.price-item-name {
+  color: #2f2e2e;
+  font-weight: 500;
+}
+
+.price-item-desc {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.price-item-servings {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.category-description {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin: -0.5rem 0 1rem 0;
+}
+
 .price {
   font-weight: bold;
   color: #ff69b4;
   font-size: 1.1rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.pricing-loading,
+.pricing-error {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.pricing-error {
+  color: #e53e3e;
 }
 
 .pricing-card .note {
