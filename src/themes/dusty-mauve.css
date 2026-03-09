@@ -1,0 +1,422 @@
+/*
+ * Theme: Dusty Mauve
+ * Vibe: Sophisticated warmth - mauve, champagne, warm gray
+ * Logo color: #9c7c8c (dusty mauve)
+ * Primary: dusty mauve/plum
+ * Secondary: champagne gold
+ * Font feel: vintage-chic, muted elegance
+ */
+
+/* === CSS Variable Overrides === */
+:root {
+  --background: 330 10% 95%;
+  --foreground: 330 15% 18%;
+  --card: 330 10% 98%;
+  --card-foreground: 330 15% 18%;
+  --popover: 330 10% 98%;
+  --popover-foreground: 330 15% 18%;
+  --primary: 330 20% 52%;
+  --primary-foreground: 330 10% 98%;
+  --secondary: 40 40% 60%;
+  --secondary-foreground: 40 40% 15%;
+  --muted: 330 8% 90%;
+  --muted-foreground: 330 10% 45%;
+  --accent: 330 10% 92%;
+  --accent-foreground: 330 20% 42%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 330 8% 80%;
+  --input: 330 8% 80%;
+  --ring: 330 20% 52%;
+}
+
+/* === Header Overrides === */
+header.sticky {
+  border-bottom-color: rgba(156, 124, 140, 0.3) !important;
+  background-color: rgba(255, 250, 252, 0.95) !important;
+}
+header h1 {
+  color: #9c7c8c !important;
+}
+header nav a,
+header nav .flex.items-center {
+  color: #4a3842 !important;
+}
+header nav a:hover {
+  color: #9c7c8c !important;
+}
+header nav a.bg-sky-500,
+header nav a[class*="bg-sky"] {
+  background-color: #9c7c8c !important;
+  color: #fff !important;
+}
+header nav a.bg-sky-500:hover,
+header nav a[class*="bg-sky"]:hover {
+  background-color: #846474 !important;
+}
+
+/* === Footer Overrides === */
+footer {
+  background-color: #352830 !important;
+  border-top-color: rgba(156, 124, 140, 0.4) !important;
+  color: #e8d8e0 !important;
+}
+footer a:hover {
+  color: #c8a870 !important;
+}
+
+/* === Home Page Overrides === */
+.home-page {
+  background-color: #faf6f8 !important;
+}
+.hero {
+  background: linear-gradient(135deg, #9c7c8c 0%, #7a5e6e 100%) !important;
+  border-bottom-color: #c8a870 !important;
+}
+.hero::after {
+  background: #c8a870 !important;
+}
+.hero-content h1 {
+  color: #ffffff !important;
+}
+.tagline {
+  color: #f0e0e8 !important;
+}
+.about-content h2,
+.cta-content h2 {
+  color: #352830 !important;
+}
+.about-content h2::after {
+  background: #c8a870 !important;
+}
+.about-text p {
+  color: #5a4a52 !important;
+}
+.cta-section {
+  background-color: #f2e8ed !important;
+  border-color: #d8c4d0 !important;
+}
+.cta-content p {
+  color: #5a4a52 !important;
+}
+.cta-button {
+  border-color: #9c7c8c !important;
+  color: #7a5e6e !important;
+}
+.cta-button.primary {
+  background-color: #9c7c8c !important;
+  color: #ffffff !important;
+}
+.cta-button.primary:hover {
+  background-color: #7a5e6e !important;
+  border-color: #7a5e6e !important;
+}
+.cta-button.secondary {
+  background-color: #c8a870 !important;
+  border-color: #c8a870 !important;
+  color: #352830 !important;
+}
+.cta-button.secondary:hover {
+  background-color: #b0925c !important;
+  border-color: #b0925c !important;
+}
+.cta-button:hover {
+  box-shadow: 0 4px 10px rgba(156, 124, 140, 0.3) !important;
+}
+.info-card {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 10px rgba(156, 124, 140, 0.1) !important;
+}
+.info-card h3 {
+  color: #9c7c8c !important;
+}
+.info-card p {
+  color: #5a4a52 !important;
+}
+
+/* === Mobile Menu Overrides === */
+.absolute.top-16 {
+  background-color: #fffafc !important;
+  border-bottom-color: rgba(156, 124, 140, 0.3) !important;
+}
+
+/* === Pricing Page Overrides === */
+.pricing-page {
+  background-color: #faf6f8 !important;
+}
+.pricing-header {
+  background: linear-gradient(135deg, #9c7c8c 0%, #7a5e6e 100%) !important;
+  border-bottom-color: #c8a870 !important;
+}
+.pricing-header h1 {
+  color: #ffffff !important;
+}
+.pricing-header p {
+  color: #f0e0e8 !important;
+}
+.pricing-intro p {
+  color: #5a4a52 !important;
+}
+.pricing-card {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+  border-top: 4px solid #9c7c8c !important;
+}
+.pricing-card.featured {
+  border-top-color: #c8a870 !important;
+  background: linear-gradient(135deg, #f2e8ed 0%, #faf6f8 100%) !important;
+}
+.pricing-card h3 {
+  color: #352830 !important;
+}
+.price-row {
+  background-color: #f2e8ed !important;
+}
+.price-row span:first-child {
+  color: #352830 !important;
+}
+.price-item-name {
+  color: #352830 !important;
+}
+.price {
+  color: #c8a870 !important;
+}
+.pricing-notes {
+  background-color: #f2e8ed !important;
+  border-color: #d8c4d0 !important;
+}
+.pricing-notes h3 {
+  color: #352830 !important;
+}
+.pricing-notes li {
+  color: #5a4a52 !important;
+}
+.pricing-cta {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+}
+.pricing-cta h3 {
+  color: #352830 !important;
+}
+.pricing-cta p {
+  color: #5a4a52 !important;
+}
+.btn-primary {
+  background-color: #9c7c8c !important;
+  border-color: #9c7c8c !important;
+}
+.btn-primary:hover {
+  background-color: #7a5e6e !important;
+  border-color: #7a5e6e !important;
+  box-shadow: 0 4px 10px rgba(156, 124, 140, 0.3) !important;
+}
+.btn-secondary {
+  color: #7a5e6e !important;
+  border-color: #9c7c8c !important;
+  background-color: #ffffff !important;
+}
+.btn-secondary:hover {
+  background-color: #c8a870 !important;
+  color: #352830 !important;
+  border-color: #c8a870 !important;
+  box-shadow: 0 4px 10px rgba(200, 168, 112, 0.3) !important;
+}
+
+/* === Contact Page Overrides === */
+.contact-page {
+  background-color: #faf6f8 !important;
+}
+.contact-header {
+  background: linear-gradient(135deg, #9c7c8c 0%, #7a5e6e 100%) !important;
+  border-bottom-color: #c8a870 !important;
+}
+.contact-header h1 {
+  color: #ffffff !important;
+}
+.contact-header p {
+  color: #f0e0e8 !important;
+}
+.info-box {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+}
+.info-box h2 {
+  color: #352830 !important;
+  border-bottom-color: #c8a870 !important;
+}
+.info-item h3 {
+  color: #352830 !important;
+}
+.info-item p {
+  color: #5a4a52 !important;
+}
+.info-item a {
+  color: #9c7c8c !important;
+}
+.info-item a:hover {
+  color: #7a5e6e !important;
+}
+.time {
+  color: #9c7c8c !important;
+}
+.day {
+  color: #352830 !important;
+}
+.contact-form-section {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+}
+.contact-form-section h2 {
+  color: #352830 !important;
+  border-bottom-color: #c8a870 !important;
+}
+.contact-form label {
+  color: #352830 !important;
+}
+.contact-form input,
+.contact-form textarea {
+  border-color: #d8c4d0 !important;
+  background-color: #faf6f8 !important;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #9c7c8c !important;
+  box-shadow: 0 0 0 2px rgba(156, 124, 140, 0.2) !important;
+}
+.submit-btn {
+  background-color: #9c7c8c !important;
+}
+.submit-btn:hover {
+  background-color: #7a5e6e !important;
+}
+
+/* === Flavors Page Overrides === */
+.flavors-page {
+  background-color: #faf6f8 !important;
+}
+.flavors-header {
+  background: linear-gradient(135deg, #9c7c8c 0%, #7a5e6e 100%) !important;
+  border-bottom-color: #c8a870 !important;
+}
+.flavors-header h1 {
+  color: #ffffff !important;
+}
+.flavors-header p {
+  color: #f0e0e8 !important;
+}
+.flavors-intro p {
+  color: #5a4a52 !important;
+}
+.flavor-section h2 {
+  color: #352830 !important;
+}
+.flavor-section h2::after {
+  background: #c8a870 !important;
+}
+.flavor-card {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+  border-left: 4px solid #c8a870 !important;
+}
+.flavor-card:hover {
+  box-shadow: 0 4px 12px rgba(156, 124, 140, 0.2) !important;
+}
+.flavor-card h3 {
+  color: #352830 !important;
+}
+.flavor-card p {
+  color: #7a6a72 !important;
+}
+.filling-item {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 6px rgba(156, 124, 140, 0.1) !important;
+  border-top: 3px solid #9c7c8c !important;
+}
+.popular-combos {
+  background: linear-gradient(135deg, #f2e8ed 0%, #faf6f8 100%) !important;
+  border-color: #d8c4d0 !important;
+}
+.popular-combos h2 {
+  color: #352830 !important;
+}
+.combo-card {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 8px rgba(156, 124, 140, 0.12) !important;
+  border-top: 4px solid #9c7c8c !important;
+}
+.combo-card h3 {
+  color: #352830 !important;
+}
+.combo-card p {
+  color: #5a4a52 !important;
+}
+.flavors-note {
+  background-color: #7a5e6e !important;
+}
+.flavors-note h3 {
+  color: #f0e0e8 !important;
+}
+.flavors-note p {
+  color: #f0e0e8 !important;
+}
+
+/* === Gallery Page Overrides === */
+.gallery-page {
+  background-color: #faf6f8 !important;
+}
+.gallery-header {
+  background: linear-gradient(135deg, #9c7c8c 0%, #7a5e6e 100%) !important;
+  border-bottom-color: #c8a870 !important;
+}
+.gallery-header h1 {
+  color: #ffffff !important;
+}
+.gallery-header p {
+  color: #f0e0e8 !important;
+}
+.gallery-item {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 3px 10px rgba(156, 124, 140, 0.18) !important;
+}
+.gallery-item:hover {
+  box-shadow: 0 6px 18px rgba(156, 124, 140, 0.28) !important;
+}
+.gallery-notice {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 3px 10px rgba(156, 124, 140, 0.1) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #faf6f8 100%) !important;
+}
+.gallery-notice h3 {
+  color: #352830 !important;
+}
+.gallery-notice p {
+  color: #5a4a52 !important;
+}
+.category-navigation h3 {
+  color: #352830 !important;
+}
+.category-link {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 2px 5px rgba(156, 124, 140, 0.1) !important;
+}
+.category-link:hover {
+  background-color: #9c7c8c !important;
+  color: #ffffff !important;
+  border-color: #9c7c8c !important;
+  box-shadow: 0 4px 10px rgba(156, 124, 140, 0.25) !important;
+}
+.category-link.active {
+  background-color: #9c7c8c !important;
+  color: #ffffff !important;
+  border-color: #7a5e6e !important;
+}
+.gallery-cta {
+  border-color: #d8c4d0 !important;
+  box-shadow: 0 3px 10px rgba(156, 124, 140, 0.1) !important;
+}
+.gallery-cta h3 {
+  color: #352830 !important;
+}
+.gallery-cta p {
+  color: #5a4a52 !important;
+}

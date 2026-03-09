@@ -1,0 +1,422 @@
+/*
+ * Theme: Garden Party
+ * Vibe: Fresh and natural - sage green, blush pink, warm cream
+ * Logo color: #6b8f71 (sage green)
+ * Primary: sage/olive green
+ * Secondary: blush pink
+ * Font feel: organic, welcoming, garden-fresh
+ */
+
+/* === CSS Variable Overrides === */
+:root {
+  --background: 100 15% 95%;
+  --foreground: 140 25% 18%;
+  --card: 100 15% 98%;
+  --card-foreground: 140 25% 18%;
+  --popover: 100 15% 98%;
+  --popover-foreground: 140 25% 18%;
+  --primary: 130 25% 48%;
+  --primary-foreground: 100 15% 98%;
+  --secondary: 345 45% 65%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 100 12% 90%;
+  --muted-foreground: 140 15% 45%;
+  --accent: 100 15% 92%;
+  --accent-foreground: 130 25% 38%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 100 12% 80%;
+  --input: 100 12% 80%;
+  --ring: 130 25% 48%;
+}
+
+/* === Header Overrides === */
+header.sticky {
+  border-bottom-color: rgba(107, 143, 113, 0.3) !important;
+  background-color: rgba(252, 255, 250, 0.95) !important;
+}
+header h1 {
+  color: #6b8f71 !important;
+}
+header nav a,
+header nav .flex.items-center {
+  color: #2d4a32 !important;
+}
+header nav a:hover {
+  color: #6b8f71 !important;
+}
+header nav a.bg-sky-500,
+header nav a[class*="bg-sky"] {
+  background-color: #6b8f71 !important;
+  color: #fff !important;
+}
+header nav a.bg-sky-500:hover,
+header nav a[class*="bg-sky"]:hover {
+  background-color: #567359 !important;
+}
+
+/* === Footer Overrides === */
+footer {
+  background-color: #1e3320 !important;
+  border-top-color: rgba(107, 143, 113, 0.4) !important;
+  color: #d4e8d6 !important;
+}
+footer a:hover {
+  color: #d4849a !important;
+}
+
+/* === Home Page Overrides === */
+.home-page {
+  background-color: #f5f8f3 !important;
+}
+.hero {
+  background: linear-gradient(135deg, #6b8f71 0%, #4a7050 100%) !important;
+  border-bottom-color: #d4849a !important;
+}
+.hero::after {
+  background: #d4849a !important;
+}
+.hero-content h1 {
+  color: #ffffff !important;
+}
+.tagline {
+  color: #d4e8d6 !important;
+}
+.about-content h2,
+.cta-content h2 {
+  color: #1e3320 !important;
+}
+.about-content h2::after {
+  background: #d4849a !important;
+}
+.about-text p {
+  color: #3d5a40 !important;
+}
+.cta-section {
+  background-color: #eaf2e8 !important;
+  border-color: #c5d8c4 !important;
+}
+.cta-content p {
+  color: #3d5a40 !important;
+}
+.cta-button {
+  border-color: #6b8f71 !important;
+  color: #4a7050 !important;
+}
+.cta-button.primary {
+  background-color: #6b8f71 !important;
+  color: #ffffff !important;
+}
+.cta-button.primary:hover {
+  background-color: #4a7050 !important;
+  border-color: #4a7050 !important;
+}
+.cta-button.secondary {
+  background-color: #d4849a !important;
+  border-color: #d4849a !important;
+  color: #ffffff !important;
+}
+.cta-button.secondary:hover {
+  background-color: #b86c82 !important;
+  border-color: #b86c82 !important;
+}
+.cta-button:hover {
+  box-shadow: 0 4px 10px rgba(107, 143, 113, 0.3) !important;
+}
+.info-card {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 10px rgba(107, 143, 113, 0.1) !important;
+}
+.info-card h3 {
+  color: #6b8f71 !important;
+}
+.info-card p {
+  color: #3d5a40 !important;
+}
+
+/* === Mobile Menu Overrides === */
+.absolute.top-16 {
+  background-color: #fcfffa !important;
+  border-bottom-color: rgba(107, 143, 113, 0.3) !important;
+}
+
+/* === Pricing Page Overrides === */
+.pricing-page {
+  background-color: #f5f8f3 !important;
+}
+.pricing-header {
+  background: linear-gradient(135deg, #6b8f71 0%, #4a7050 100%) !important;
+  border-bottom-color: #d4849a !important;
+}
+.pricing-header h1 {
+  color: #ffffff !important;
+}
+.pricing-header p {
+  color: #d4e8d6 !important;
+}
+.pricing-intro p {
+  color: #3d5a40 !important;
+}
+.pricing-card {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+  border-top: 4px solid #6b8f71 !important;
+}
+.pricing-card.featured {
+  border-top-color: #d4849a !important;
+  background: linear-gradient(135deg, #eaf2e8 0%, #f5f8f3 100%) !important;
+}
+.pricing-card h3 {
+  color: #1e3320 !important;
+}
+.price-row {
+  background-color: #eaf2e8 !important;
+}
+.price-row span:first-child {
+  color: #1e3320 !important;
+}
+.price-item-name {
+  color: #1e3320 !important;
+}
+.price {
+  color: #d4849a !important;
+}
+.pricing-notes {
+  background-color: #eaf2e8 !important;
+  border-color: #c5d8c4 !important;
+}
+.pricing-notes h3 {
+  color: #1e3320 !important;
+}
+.pricing-notes li {
+  color: #3d5a40 !important;
+}
+.pricing-cta {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+}
+.pricing-cta h3 {
+  color: #1e3320 !important;
+}
+.pricing-cta p {
+  color: #3d5a40 !important;
+}
+.btn-primary {
+  background-color: #6b8f71 !important;
+  border-color: #6b8f71 !important;
+}
+.btn-primary:hover {
+  background-color: #4a7050 !important;
+  border-color: #4a7050 !important;
+  box-shadow: 0 4px 10px rgba(107, 143, 113, 0.3) !important;
+}
+.btn-secondary {
+  color: #4a7050 !important;
+  border-color: #6b8f71 !important;
+  background-color: #ffffff !important;
+}
+.btn-secondary:hover {
+  background-color: #d4849a !important;
+  color: #ffffff !important;
+  border-color: #d4849a !important;
+  box-shadow: 0 4px 10px rgba(212, 132, 154, 0.3) !important;
+}
+
+/* === Contact Page Overrides === */
+.contact-page {
+  background-color: #f5f8f3 !important;
+}
+.contact-header {
+  background: linear-gradient(135deg, #6b8f71 0%, #4a7050 100%) !important;
+  border-bottom-color: #d4849a !important;
+}
+.contact-header h1 {
+  color: #ffffff !important;
+}
+.contact-header p {
+  color: #d4e8d6 !important;
+}
+.info-box {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+}
+.info-box h2 {
+  color: #1e3320 !important;
+  border-bottom-color: #d4849a !important;
+}
+.info-item h3 {
+  color: #1e3320 !important;
+}
+.info-item p {
+  color: #3d5a40 !important;
+}
+.info-item a {
+  color: #6b8f71 !important;
+}
+.info-item a:hover {
+  color: #4a7050 !important;
+}
+.time {
+  color: #6b8f71 !important;
+}
+.day {
+  color: #1e3320 !important;
+}
+.contact-form-section {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+}
+.contact-form-section h2 {
+  color: #1e3320 !important;
+  border-bottom-color: #d4849a !important;
+}
+.contact-form label {
+  color: #1e3320 !important;
+}
+.contact-form input,
+.contact-form textarea {
+  border-color: #c5d8c4 !important;
+  background-color: #f5f8f3 !important;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #6b8f71 !important;
+  box-shadow: 0 0 0 2px rgba(107, 143, 113, 0.2) !important;
+}
+.submit-btn {
+  background-color: #6b8f71 !important;
+}
+.submit-btn:hover {
+  background-color: #4a7050 !important;
+}
+
+/* === Flavors Page Overrides === */
+.flavors-page {
+  background-color: #f5f8f3 !important;
+}
+.flavors-header {
+  background: linear-gradient(135deg, #6b8f71 0%, #4a7050 100%) !important;
+  border-bottom-color: #d4849a !important;
+}
+.flavors-header h1 {
+  color: #ffffff !important;
+}
+.flavors-header p {
+  color: #d4e8d6 !important;
+}
+.flavors-intro p {
+  color: #3d5a40 !important;
+}
+.flavor-section h2 {
+  color: #1e3320 !important;
+}
+.flavor-section h2::after {
+  background: #d4849a !important;
+}
+.flavor-card {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+  border-left: 4px solid #d4849a !important;
+}
+.flavor-card:hover {
+  box-shadow: 0 4px 12px rgba(107, 143, 113, 0.2) !important;
+}
+.flavor-card h3 {
+  color: #1e3320 !important;
+}
+.flavor-card p {
+  color: #5a7a5e !important;
+}
+.filling-item {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 6px rgba(107, 143, 113, 0.1) !important;
+  border-top: 3px solid #6b8f71 !important;
+}
+.popular-combos {
+  background: linear-gradient(135deg, #eaf2e8 0%, #f5f8f3 100%) !important;
+  border-color: #c5d8c4 !important;
+}
+.popular-combos h2 {
+  color: #1e3320 !important;
+}
+.combo-card {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 8px rgba(107, 143, 113, 0.12) !important;
+  border-top: 4px solid #6b8f71 !important;
+}
+.combo-card h3 {
+  color: #1e3320 !important;
+}
+.combo-card p {
+  color: #3d5a40 !important;
+}
+.flavors-note {
+  background-color: #4a7050 !important;
+}
+.flavors-note h3 {
+  color: #d4e8d6 !important;
+}
+.flavors-note p {
+  color: #d4e8d6 !important;
+}
+
+/* === Gallery Page Overrides === */
+.gallery-page {
+  background-color: #f5f8f3 !important;
+}
+.gallery-header {
+  background: linear-gradient(135deg, #6b8f71 0%, #4a7050 100%) !important;
+  border-bottom-color: #d4849a !important;
+}
+.gallery-header h1 {
+  color: #ffffff !important;
+}
+.gallery-header p {
+  color: #d4e8d6 !important;
+}
+.gallery-item {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 3px 10px rgba(107, 143, 113, 0.18) !important;
+}
+.gallery-item:hover {
+  box-shadow: 0 6px 18px rgba(107, 143, 113, 0.28) !important;
+}
+.gallery-notice {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 3px 10px rgba(107, 143, 113, 0.1) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f8f3 100%) !important;
+}
+.gallery-notice h3 {
+  color: #1e3320 !important;
+}
+.gallery-notice p {
+  color: #3d5a40 !important;
+}
+.category-navigation h3 {
+  color: #1e3320 !important;
+}
+.category-link {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 2px 5px rgba(107, 143, 113, 0.1) !important;
+}
+.category-link:hover {
+  background-color: #6b8f71 !important;
+  color: #ffffff !important;
+  border-color: #6b8f71 !important;
+  box-shadow: 0 4px 10px rgba(107, 143, 113, 0.25) !important;
+}
+.category-link.active {
+  background-color: #6b8f71 !important;
+  color: #ffffff !important;
+  border-color: #4a7050 !important;
+}
+.gallery-cta {
+  border-color: #c5d8c4 !important;
+  box-shadow: 0 3px 10px rgba(107, 143, 113, 0.1) !important;
+}
+.gallery-cta h3 {
+  color: #1e3320 !important;
+}
+.gallery-cta p {
+  color: #3d5a40 !important;
+}

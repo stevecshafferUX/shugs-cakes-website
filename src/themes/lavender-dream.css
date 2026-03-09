@@ -1,0 +1,422 @@
+/*
+ * Theme: Lavender Dream
+ * Vibe: Soft, whimsical pastels - lavender, cream, light lilac
+ * Logo color: #9370db (medium purple)
+ * Primary: lavender/purple
+ * Secondary: soft pink
+ * Font feel: dreamy, feminine, delicate
+ */
+
+/* === CSS Variable Overrides === */
+:root {
+  --background: 270 20% 95%;
+  --foreground: 270 30% 18%;
+  --card: 270 20% 98%;
+  --card-foreground: 270 30% 18%;
+  --popover: 270 20% 98%;
+  --popover-foreground: 270 30% 18%;
+  --primary: 260 60% 65%;
+  --primary-foreground: 270 20% 98%;
+  --secondary: 330 55% 65%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 270 15% 90%;
+  --muted-foreground: 270 20% 45%;
+  --accent: 270 20% 93%;
+  --accent-foreground: 260 60% 55%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 270 18% 82%;
+  --input: 270 18% 82%;
+  --ring: 260 60% 65%;
+}
+
+/* === Header Overrides === */
+header.sticky {
+  border-bottom-color: rgba(147, 112, 219, 0.3) !important;
+  background-color: rgba(252, 248, 255, 0.95) !important;
+}
+header h1 {
+  color: #9370db !important;
+}
+header nav a,
+header nav .flex.items-center {
+  color: #3d2e5c !important;
+}
+header nav a:hover {
+  color: #9370db !important;
+}
+header nav a.bg-sky-500,
+header nav a[class*="bg-sky"] {
+  background-color: #9370db !important;
+  color: #fff !important;
+}
+header nav a.bg-sky-500:hover,
+header nav a[class*="bg-sky"]:hover {
+  background-color: #7b5bc4 !important;
+}
+
+/* === Footer Overrides === */
+footer {
+  background-color: #2e1f4a !important;
+  border-top-color: rgba(147, 112, 219, 0.4) !important;
+  color: #e8dff5 !important;
+}
+footer a:hover {
+  color: #c9a0e0 !important;
+}
+
+/* === Home Page Overrides === */
+.home-page {
+  background-color: #f8f4fc !important;
+}
+.hero {
+  background: linear-gradient(135deg, #9370db 0%, #7b5bc4 100%) !important;
+  border-bottom-color: #d4789c !important;
+}
+.hero::after {
+  background: #d4789c !important;
+}
+.hero-content h1 {
+  color: #ffffff !important;
+}
+.tagline {
+  color: #e8dff5 !important;
+}
+.about-content h2,
+.cta-content h2 {
+  color: #2e1f4a !important;
+}
+.about-content h2::after {
+  background: #d4789c !important;
+}
+.about-text p {
+  color: #4a3d6b !important;
+}
+.cta-section {
+  background-color: #f0e8f8 !important;
+  border-color: #d4c4e8 !important;
+}
+.cta-content p {
+  color: #4a3d6b !important;
+}
+.cta-button {
+  border-color: #9370db !important;
+  color: #7b5bc4 !important;
+}
+.cta-button.primary {
+  background-color: #9370db !important;
+  color: #ffffff !important;
+}
+.cta-button.primary:hover {
+  background-color: #7b5bc4 !important;
+  border-color: #7b5bc4 !important;
+}
+.cta-button.secondary {
+  background-color: #d4789c !important;
+  border-color: #d4789c !important;
+  color: #ffffff !important;
+}
+.cta-button.secondary:hover {
+  background-color: #b8607f !important;
+  border-color: #b8607f !important;
+}
+.cta-button:hover {
+  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3) !important;
+}
+.info-card {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 10px rgba(147, 112, 219, 0.1) !important;
+}
+.info-card h3 {
+  color: #9370db !important;
+}
+.info-card p {
+  color: #4a3d6b !important;
+}
+
+/* === Mobile Menu Overrides === */
+.absolute.top-16 {
+  background-color: #fcf8ff !important;
+  border-bottom-color: rgba(147, 112, 219, 0.3) !important;
+}
+
+/* === Pricing Page Overrides === */
+.pricing-page {
+  background-color: #f8f4fc !important;
+}
+.pricing-header {
+  background: linear-gradient(135deg, #9370db 0%, #7b5bc4 100%) !important;
+  border-bottom-color: #d4789c !important;
+}
+.pricing-header h1 {
+  color: #ffffff !important;
+}
+.pricing-header p {
+  color: #e8dff5 !important;
+}
+.pricing-intro p {
+  color: #4a3d6b !important;
+}
+.pricing-card {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+  border-top: 4px solid #9370db !important;
+}
+.pricing-card.featured {
+  border-top-color: #d4789c !important;
+  background: linear-gradient(135deg, #f0e8f8 0%, #f8f4fc 100%) !important;
+}
+.pricing-card h3 {
+  color: #2e1f4a !important;
+}
+.price-row {
+  background-color: #f0e8f8 !important;
+}
+.price-row span:first-child {
+  color: #2e1f4a !important;
+}
+.price-item-name {
+  color: #2e1f4a !important;
+}
+.price {
+  color: #d4789c !important;
+}
+.pricing-notes {
+  background-color: #f0e8f8 !important;
+  border-color: #d4c4e8 !important;
+}
+.pricing-notes h3 {
+  color: #2e1f4a !important;
+}
+.pricing-notes li {
+  color: #4a3d6b !important;
+}
+.pricing-cta {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+}
+.pricing-cta h3 {
+  color: #2e1f4a !important;
+}
+.pricing-cta p {
+  color: #4a3d6b !important;
+}
+.btn-primary {
+  background-color: #9370db !important;
+  border-color: #9370db !important;
+}
+.btn-primary:hover {
+  background-color: #7b5bc4 !important;
+  border-color: #7b5bc4 !important;
+  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3) !important;
+}
+.btn-secondary {
+  color: #7b5bc4 !important;
+  border-color: #9370db !important;
+  background-color: #ffffff !important;
+}
+.btn-secondary:hover {
+  background-color: #d4789c !important;
+  color: #ffffff !important;
+  border-color: #d4789c !important;
+  box-shadow: 0 4px 10px rgba(212, 120, 156, 0.3) !important;
+}
+
+/* === Contact Page Overrides === */
+.contact-page {
+  background-color: #f8f4fc !important;
+}
+.contact-header {
+  background: linear-gradient(135deg, #9370db 0%, #7b5bc4 100%) !important;
+  border-bottom-color: #d4789c !important;
+}
+.contact-header h1 {
+  color: #ffffff !important;
+}
+.contact-header p {
+  color: #e8dff5 !important;
+}
+.info-box {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+}
+.info-box h2 {
+  color: #2e1f4a !important;
+  border-bottom-color: #d4789c !important;
+}
+.info-item h3 {
+  color: #2e1f4a !important;
+}
+.info-item p {
+  color: #4a3d6b !important;
+}
+.info-item a {
+  color: #9370db !important;
+}
+.info-item a:hover {
+  color: #7b5bc4 !important;
+}
+.time {
+  color: #9370db !important;
+}
+.day {
+  color: #2e1f4a !important;
+}
+.contact-form-section {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+}
+.contact-form-section h2 {
+  color: #2e1f4a !important;
+  border-bottom-color: #d4789c !important;
+}
+.contact-form label {
+  color: #2e1f4a !important;
+}
+.contact-form input,
+.contact-form textarea {
+  border-color: #d4c4e8 !important;
+  background-color: #f8f4fc !important;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #9370db !important;
+  box-shadow: 0 0 0 2px rgba(147, 112, 219, 0.2) !important;
+}
+.submit-btn {
+  background-color: #9370db !important;
+}
+.submit-btn:hover {
+  background-color: #7b5bc4 !important;
+}
+
+/* === Flavors Page Overrides === */
+.flavors-page {
+  background-color: #f8f4fc !important;
+}
+.flavors-header {
+  background: linear-gradient(135deg, #9370db 0%, #7b5bc4 100%) !important;
+  border-bottom-color: #d4789c !important;
+}
+.flavors-header h1 {
+  color: #ffffff !important;
+}
+.flavors-header p {
+  color: #e8dff5 !important;
+}
+.flavors-intro p {
+  color: #4a3d6b !important;
+}
+.flavor-section h2 {
+  color: #2e1f4a !important;
+}
+.flavor-section h2::after {
+  background: #d4789c !important;
+}
+.flavor-card {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+  border-left: 4px solid #d4789c !important;
+}
+.flavor-card:hover {
+  box-shadow: 0 4px 12px rgba(147, 112, 219, 0.2) !important;
+}
+.flavor-card h3 {
+  color: #2e1f4a !important;
+}
+.flavor-card p {
+  color: #6b5f8a !important;
+}
+.filling-item {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 6px rgba(147, 112, 219, 0.1) !important;
+  border-top: 3px solid #9370db !important;
+}
+.popular-combos {
+  background: linear-gradient(135deg, #f0e8f8 0%, #f8f4fc 100%) !important;
+  border-color: #d4c4e8 !important;
+}
+.popular-combos h2 {
+  color: #2e1f4a !important;
+}
+.combo-card {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.12) !important;
+  border-top: 4px solid #9370db !important;
+}
+.combo-card h3 {
+  color: #2e1f4a !important;
+}
+.combo-card p {
+  color: #4a3d6b !important;
+}
+.flavors-note {
+  background-color: #7b5bc4 !important;
+}
+.flavors-note h3 {
+  color: #e8dff5 !important;
+}
+.flavors-note p {
+  color: #e8dff5 !important;
+}
+
+/* === Gallery Page Overrides === */
+.gallery-page {
+  background-color: #f8f4fc !important;
+}
+.gallery-header {
+  background: linear-gradient(135deg, #9370db 0%, #7b5bc4 100%) !important;
+  border-bottom-color: #d4789c !important;
+}
+.gallery-header h1 {
+  color: #ffffff !important;
+}
+.gallery-header p {
+  color: #e8dff5 !important;
+}
+.gallery-item {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 3px 10px rgba(147, 112, 219, 0.18) !important;
+}
+.gallery-item:hover {
+  box-shadow: 0 6px 18px rgba(147, 112, 219, 0.28) !important;
+}
+.gallery-notice {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 3px 10px rgba(147, 112, 219, 0.1) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f4fc 100%) !important;
+}
+.gallery-notice h3 {
+  color: #2e1f4a !important;
+}
+.gallery-notice p {
+  color: #4a3d6b !important;
+}
+.category-navigation h3 {
+  color: #2e1f4a !important;
+}
+.category-link {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 2px 5px rgba(147, 112, 219, 0.1) !important;
+}
+.category-link:hover {
+  background-color: #9370db !important;
+  color: #ffffff !important;
+  border-color: #9370db !important;
+  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.25) !important;
+}
+.category-link.active {
+  background-color: #9370db !important;
+  color: #ffffff !important;
+  border-color: #7b5bc4 !important;
+}
+.gallery-cta {
+  border-color: #d4c4e8 !important;
+  box-shadow: 0 3px 10px rgba(147, 112, 219, 0.1) !important;
+}
+.gallery-cta h3 {
+  color: #2e1f4a !important;
+}
+.gallery-cta p {
+  color: #4a3d6b !important;
+}

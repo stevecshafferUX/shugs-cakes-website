@@ -1,226 +1,268 @@
 .flavors-page {
   min-height: calc(100vh - 200px);
-  background-color: #f5efe8;
+  background: var(--cream);
 }
 
 .flavors-header {
-  background: linear-gradient(135deg, #8b5e3c 0%, #6b3f2a 100%);
-  color: #f5efe8;
-  padding: 3rem 2rem;
+  background: linear-gradient(135deg, var(--p500), var(--p800));
+  color: #ffffff;
+  padding: 2.5rem 2rem;
   text-align: center;
-  border-bottom: 3px solid #c4a882;
 }
 
 .flavors-header h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #ffffff;
   margin: 0 0 0.5rem 0;
-  font-weight: 700;
-  color: #f5efe8;
 }
 
 .flavors-header p {
-  font-size: 1.1rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
   margin: 0;
-  color: #e8d5c0;
+  color: var(--p200);
   font-style: italic;
+  letter-spacing: 0.06em;
 }
 
-.flavors-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-}
-
+/* ── INTRO ────────────────────────────────── */
 .flavors-intro {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 40px;
+}
+
+.flavors-main-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: var(--dark);
+  margin: 8px 0 16px;
 }
 
 .flavors-intro p {
+  font-family: 'Outfit', sans-serif;
   font-size: 1.05rem;
-  color: #5c4033;
-  max-width: 800px;
+  color: var(--mid);
+  max-width: 680px;
   margin: 0 auto;
   line-height: 1.7;
 }
 
-.flavor-section {
-  margin-bottom: 4rem;
+/* ── FILTER TABS ──────────────────────────── */
+.flavor-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
-.flavor-section h2 {
-  font-family: 'Playfair Display', serif;
-  color: #6b3f2a;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  text-align: center;
-  font-weight: 700;
+.flavor-tab {
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 2px solid var(--p200);
+  background: white;
+  color: var(--mid);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.flavor-section h2::after {
-  content: '';
-  display: block;
-  width: 50px;
-  height: 2px;
-  background: #c4a882;
-  margin: 0.5rem auto 1.5rem;
+.flavor-tab.active {
+  background: linear-gradient(135deg, var(--p500), var(--p700));
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 4px 16px rgba(190, 24, 93, 0.25);
 }
 
-.section-note {
-  text-align: center;
-  font-style: italic;
-  color: #8b7355;
-  margin-bottom: 2rem;
+.flavor-tab:not(.active):hover {
+  border-color: var(--p400);
+  color: var(--p600);
 }
 
+/* ── FLAVOR CARDS GRID ───────────────────── */
 .flavor-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 20px;
+  margin-bottom: 64px;
 }
 
 .flavor-card {
-  background-color: #faf6f0;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(107, 63, 42, 0.1);
-  border: 1px solid #e0d4c4;
-  border-left: 4px solid #8b5e3c;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 24px;
+  position: relative;
+  background: white;
 }
 
-.flavor-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(107, 63, 42, 0.18);
+.flavor-card.popular {
+  background: var(--p50);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--p700);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
 }
 
 .flavor-card h3 {
   font-family: 'Playfair Display', serif;
-  color: #5c4033;
-  font-size: 1.15rem;
-  margin: 0 0 0.5rem 0;
-  font-weight: 600;
-}
-
-.flavor-card p {
-  color: #7a6350;
-  margin: 0;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-.fillings-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.filling-item {
-  background-color: #faf6f0;
-  padding: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(107, 63, 42, 0.1);
-  text-align: center;
-  font-weight: 500;
-  color: #5c4033;
-  border: 1px solid #e0d4c4;
-  border-top: 3px solid #8b5e3c;
-  transition: transform 0.3s ease;
-}
-
-.filling-item:hover {
-  transform: translateY(-2px);
-}
-
-.popular-combos {
-  background: linear-gradient(135deg, #ede4d7 0%, #f5efe8 100%);
-  padding: 3rem;
-  border-radius: 8px;
-  margin-bottom: 3rem;
-  border: 1px solid #e0d4c4;
-}
-
-.popular-combos h2 {
-  font-family: 'Playfair Display', serif;
-  color: #6b3f2a;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  text-align: center;
+  color: var(--dark);
+  font-size: 1.1rem;
+  margin: 0 0 6px 0;
   font-weight: 700;
 }
 
-.combo-grid {
+.flavor-card p {
+  font-family: 'Outfit', sans-serif;
+  color: var(--mid);
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* ── FILLINGS ─────────────────────────────── */
+.fillings-section {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.flavors-sub-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--dark);
+  margin: 8px 0 8px;
+}
+
+.section-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: var(--soft);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.fillings-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filling-chip {
+  background: white;
+  border: 2px solid var(--p100);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--dark);
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(80, 7, 36, 0.05);
+}
+.filling-chip:hover {
+  border-color: var(--p400);
+  color: var(--p700);
+  transform: translateY(-2px);
+}
+
+/* ── COMBOS ───────────────────────────────── */
+.combos-section {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.combos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  text-align: left;
+  margin-top: 24px;
 }
 
 .combo-card {
-  background-color: #faf6f0;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(107, 63, 42, 0.1);
-  border: 1px solid #e0d4c4;
-  border-top: 4px solid #8b5e3c;
+  padding: 28px;
+  background: white;
 }
 
 .combo-card h3 {
   font-family: 'Playfair Display', serif;
-  color: #6b3f2a;
-  font-size: 1.2rem;
-  margin: 0 0 1rem 0;
-  text-align: center;
+  color: var(--dark);
+  font-size: 1.15rem;
   font-weight: 700;
+  margin: 0 0 16px 0;
+  text-align: center;
 }
 
-.combo-card p {
-  color: #5c4033;
-  margin: 0.5rem 0;
+.combo-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.combo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--p50);
+  border-radius: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.combo-label {
+  font-weight: 700;
+  color: var(--mid);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── CTA ──────────────────────────────────── */
+.flavors-cta {
+  text-align: center;
+  padding: 40px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--p50), var(--p100));
+  border: 2px solid var(--p200);
+}
+
+.flavors-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.flavors-cta p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--mid);
+  margin-bottom: 24px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
   line-height: 1.6;
 }
 
-.combo-card strong {
-  color: #5c4033;
-}
-
-.flavors-note {
-  background-color: #6b3f2a;
-  color: #f5efe8;
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.flavors-note h3 {
-  font-family: 'Playfair Display', serif;
-  margin: 0 0 1rem 0;
-  color: #e8d5c0;
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.flavors-note p {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #e8d5c0;
-}
-
 @media (max-width: 768px) {
-  .flavors-header h1 {
-    font-size: 2rem;
-  }
-
-  .flavor-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .combo-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .popular-combos {
-    padding: 2rem 1.5rem;
-  }
+  .flavors-header h1 { font-size: 1.8rem; }
+  .flavor-grid { grid-template-columns: 1fr; }
+  .combos-grid { grid-template-columns: 1fr; }
 }

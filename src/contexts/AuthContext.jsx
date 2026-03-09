@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 const AuthContext = createContext({});
 
@@ -13,7 +13,6 @@ function checkIsAdmin(user) {
   }
 
   // Check if user's email is in admin list (fallback)
-  // This should be moved to a database table in production
   const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(',') || [];
   return adminEmails.includes(user.email);
 }
@@ -24,11 +23,20 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // If Supabase isn't configured, skip auth entirely
+    if (!isSupabaseConfigured) {
+      setLoading(false);
+      return;
+    }
+
     // Check active Supabase sessions
     supabase.auth.getSession().then(({ data: { session } }) => {
       const currentUser = session?.user ?? null;
       setUser(currentUser);
       setIsAdmin(checkIsAdmin(currentUser));
+      setLoading(false);
+    }).catch(() => {
+      // If Supabase call fails, just continue without auth
       setLoading(false);
     });
 
