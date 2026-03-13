@@ -5,6 +5,39 @@ import { toast } from 'sonner';
 import { BUSINESS_INFO } from '@/constants';
 import './Contact.css';
 
+const RATE_LIMIT_KEY = 'contact_rate_limit';
+const MAX_SUBMISSIONS = 3;
+const WINDOW_MS = 60 * 60 * 1000; // 1 hour
+
+function getRateLimitData() {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY);
+    return raw ? JSON.parse(raw) : { submissions: [] };
+  } catch {
+    return { submissions: [] };
+  }
+}
+
+function checkRateLimit() {
+  const now = Date.now();
+  const { submissions } = getRateLimitData();
+  const recent = submissions.filter(ts => now - ts < WINDOW_MS);
+  if (recent.length >= MAX_SUBMISSIONS) {
+    const resetAt = Math.min(...recent) + WINDOW_MS;
+    const minutesLeft = Math.ceil((resetAt - now) / 60000);
+    return { limited: true, minutesLeft };
+  }
+  return { limited: false, remaining: MAX_SUBMISSIONS - recent.length };
+}
+
+function recordSubmission() {
+  const now = Date.now();
+  const { submissions } = getRateLimitData();
+  const recent = submissions.filter(ts => now - ts < WINDOW_MS);
+  recent.push(now);
+  localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify({ submissions: recent }));
+}
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +63,13 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+
+    const rateLimit = checkRateLimit();
+    if (rateLimit.limited) {
+      toast.error(`Too many messages sent. Please wait ${rateLimit.minutesLeft} minute${rateLimit.minutesLeft === 1 ? '' : 's'} before trying again.`);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -39,6 +79,7 @@ function Contact() {
       // Submit to database
       await contactApi.submit(validatedData);
 
+      recordSubmission();
       toast.success('Thank you for your message! We will get back to you soon.');
 
       // Reset form
@@ -53,7 +94,6 @@ function Contact() {
       console.error('Contact form error:', error);
 
       if (error.name === 'ZodError') {
-        // Handle validation errors
         const fieldErrors = {};
         error.errors.forEach(err => {
           fieldErrors[err.path[0]] = err.message;
