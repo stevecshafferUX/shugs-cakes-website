@@ -8,11 +8,9 @@ const galleryData = {
     title: '3D Cakes',
     description: 'Stunning sculptured cakes that bring your vision to life',
     images: [
-      '/gallery/3d-cakes/IMG_0142.JPG',
       '/gallery/3d-cakes/IMG_1207.jpeg',
       '/gallery/3d-cakes/IMG_1736.jpg',
       '/gallery/3d-cakes/IMG_1890.jpeg',
-      '/gallery/3d-cakes/IMG_2230.JPG',
       '/gallery/3d-cakes/IMG_2294.jpeg',
       '/gallery/3d-cakes/IMG_3074.jpeg',
       '/gallery/3d-cakes/IMG_3830.jpeg',
@@ -24,9 +22,6 @@ const galleryData = {
     title: 'Anniversary Cakes',
     description: 'Celebrate years of love with a beautiful custom cake',
     images: [
-      '/gallery/anniversary/IMG_0549.JPG',
-      '/gallery/anniversary/IMG_1453.JPG',
-      '/gallery/anniversary/IMG_1739.JPG',
       '/gallery/anniversary/IMG_3632.jpeg',
       '/gallery/anniversary/IMG_4371.jpeg',
     ]
@@ -51,8 +46,6 @@ const galleryData = {
     title: 'Bridal Shower & Engagement Cakes',
     description: 'Beautiful cakes for celebrating love and upcoming nuptials',
     images: [
-      '/gallery/bridal-shower/IMG_0392.JPG',
-      '/gallery/bridal-shower/IMG_2576.JPG',
       '/gallery/bridal-shower/IMG_3149.jpeg',
       '/gallery/bridal-shower/IMG_3296.jpeg',
       '/gallery/bridal-shower/IMG_4928.jpeg',
@@ -114,7 +107,6 @@ const galleryData = {
     description: 'Creative and whimsical cake designs',
     images: [
       '/gallery/fun-cakes/IMG_1216.jpeg',
-      '/gallery/fun-cakes/IMG_2505.JPG',
       '/gallery/fun-cakes/IMG_2772.jpeg',
       '/gallery/fun-cakes/IMG_2852.jpeg',
       '/gallery/fun-cakes/IMG_4457.jpeg',
@@ -146,7 +138,6 @@ const galleryData = {
     description: 'Festive cakes for every holiday celebration',
     images: [
       '/gallery/holiday/IMG_2575.jpeg',
-      '/gallery/holiday/IMG_2787.JPG',
       '/gallery/holiday/IMG_3180.jpeg',
       '/gallery/holiday/IMG_3216.jpeg',
       '/gallery/holiday/IMG_4064.jpeg',
@@ -175,9 +166,6 @@ const galleryData = {
     images: [
       '/gallery/religious/F12744E2-FA30-437E-9E90-8FAEFCF3ACCE-2750-000004CD5465305D.jpeg',
       '/gallery/religious/IMG_1378.jpg',
-      '/gallery/religious/IMG_2043.JPG',
-      '/gallery/religious/IMG_2442.JPG',
-      '/gallery/religious/IMG_2445.JPG',
       '/gallery/religious/IMG_5104.jpeg',
       '/gallery/religious/IMG_6161.jpeg',
     ]
