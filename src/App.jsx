@@ -56,8 +56,10 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="my-orders" element={<MyOrders />} />
           <Route path="account" element={<Account />} />
-          <Route path="font-preview" element={<FontPreview />} />
         </Route>
+
+        {/* Standalone utility routes */}
+        <Route path="/font-preview" element={<FontPreview />} />
       </Routes>
     </Router>
   );
