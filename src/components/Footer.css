@@ -1,6 +1,7 @@
 .site-footer {
-  background-color: #2f2e2e;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #2f2e2e;
+  border-top: 1px solid #FFD6E7;
   margin-top: auto;
   padding: 2rem 0;
 }
@@ -30,7 +31,7 @@
 }
 
 .social-links a {
-  color: #ffffff;
+  color: #2f2e2e;
   transition: color 0.3s ease;
   display: flex;
   align-items: center;

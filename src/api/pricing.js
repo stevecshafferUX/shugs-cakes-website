@@ -10,7 +10,7 @@ export const pricingApi = {
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch categories: ${error.message}`);
     return data || [];
   },
 
@@ -21,7 +21,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to create category: ${error.message}`);
     return data;
   },
 
@@ -33,7 +33,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to update category: ${error.message}`);
     return data;
   },
 
@@ -43,7 +43,7 @@ export const pricingApi = {
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to delete category: ${error.message}`);
   },
 
   // ========================================
@@ -55,7 +55,7 @@ export const pricingApi = {
       .select('*, product_categories(name)')
       .order('created_at', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch products: ${error.message}`);
     return data || [];
   },
 
@@ -66,7 +66,7 @@ export const pricingApi = {
       .eq('is_active', true)
       .order('created_at', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch products: ${error.message}`);
     return data || [];
   },
 
@@ -77,7 +77,7 @@ export const pricingApi = {
       .select('*, product_categories(name)')
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to create product: ${error.message}`);
     return data;
   },
 
@@ -89,7 +89,7 @@ export const pricingApi = {
       .select('*, product_categories(name)')
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to update product: ${error.message}`);
     return data;
   },
 
@@ -99,7 +99,7 @@ export const pricingApi = {
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to delete product: ${error.message}`);
   },
 
   // ========================================
@@ -111,7 +111,7 @@ export const pricingApi = {
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch cake types: ${error.message}`);
     return data || [];
   },
 
@@ -122,7 +122,7 @@ export const pricingApi = {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch cake types: ${error.message}`);
     return data || [];
   },
 
@@ -133,7 +133,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to create cake type: ${error.message}`);
     return data;
   },
 
@@ -145,7 +145,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to update cake type: ${error.message}`);
     return data;
   },
 
@@ -155,7 +155,7 @@ export const pricingApi = {
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to delete cake type: ${error.message}`);
   },
 
   // ========================================
@@ -167,7 +167,7 @@ export const pricingApi = {
       .select('*')
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch flavors: ${error.message}`);
     return data || [];
   },
 
@@ -178,7 +178,7 @@ export const pricingApi = {
       .eq('is_active', true)
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to fetch flavors: ${error.message}`);
     return data || [];
   },
 
@@ -189,7 +189,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to create flavor: ${error.message}`);
     return data;
   },
 
@@ -201,7 +201,7 @@ export const pricingApi = {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to update flavor: ${error.message}`);
     return data;
   },
 
@@ -211,6 +211,6 @@ export const pricingApi = {
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (error) throw new Error(`Failed to delete flavor: ${error.message}`);
   },
 };

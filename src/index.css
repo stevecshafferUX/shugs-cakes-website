@@ -21,14 +21,14 @@
   --p900: #500724;
 
   --gold:      #D4A853;
-  --cream:     #FFFBFC;
-  --off-white: #FFF5F7;
+  --cream:     #FFFFFF;
+  --off-white: #F8F8F8;
   --dark:      #2A1020;
   --mid:       #7D3F5E;
   --soft:      #C48BA0;
 
   /* Compatibility aliases used by existing page CSS */
-  --warm-white:       #FFF5F7;
+  --warm-white:       #FFFFFF;
   --dark-brown:       #2A1020;
   --brown:            #7D3F5E;
   --brand-blue:       #EC4899;
@@ -36,8 +36,8 @@
   --brand-blue-light: #FFD6E7;
   --brand-pink:       #EC4899;
   --brand-pink-dark:  #BE185D;
-  --brand-bg:         #FFFBFC;
-  --brand-surface:    #FFF5F7;
+  --brand-bg:         #FFFFFF;
+  --brand-surface:    #F5F5F5;
   --brand-border:     #FFD6E7;
   --brand-text:       #2A1020;
   --brand-text-muted: #7D3F5E;
@@ -51,7 +51,7 @@
 
 @layer base {
   :root {
-    --background: 340 100% 99%;
+    --background: 0 0% 100%;
     --foreground: 330 50% 12%;
     --card: 0 0% 100%;
     --card-foreground: 330 50% 12%;
@@ -61,7 +61,7 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 340 100% 95%;
     --secondary-foreground: 330 50% 30%;
-    --muted: 340 60% 96%;
+    --muted: 0 0% 96%;
     --muted-foreground: 330 30% 50%;
     --accent: 340 100% 95%;
     --accent-foreground: 330 80% 45%;
@@ -330,7 +330,7 @@ input, select, textarea {
   padding: 14px 18px;
   border-radius: 14px;
   border: 2px solid var(--p100);
-  background: var(--p50);
+  background: #ffffff;
   font-family: 'Outfit', sans-serif;
   font-size: 15px;
   color: var(--dark);
