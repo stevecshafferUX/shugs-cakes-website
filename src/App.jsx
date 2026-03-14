@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Toaster } from './components/Toaster';
@@ -16,9 +17,16 @@ import Account from './pages/Account';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminOrderDetail from './pages/AdminOrderDetail';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Toaster />
       <Routes>
         {/* Admin Routes (no header/footer) */}
