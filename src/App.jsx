@@ -17,6 +17,7 @@ import Account from './pages/Account';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminOrderDetail from './pages/AdminOrderDetail';
+import FontPreview from './pages/FontPreview';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -55,6 +56,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="my-orders" element={<MyOrders />} />
           <Route path="account" element={<Account />} />
+          <Route path="font-preview" element={<FontPreview />} />
         </Route>
       </Routes>
     </Router>
