@@ -38,133 +38,18 @@ const REVIEWS = [
   },
 ];
 
-function HeroCakeGraphic() {
-  return (
-    <div className="cake-graphic">
-      {/* Background blobs */}
-      <div className="cake-blob cake-blob-1" />
-      <div className="cake-blob cake-blob-2" />
-      <div className="cake-blob cake-blob-3" />
-
-      {/* Orbiting rings */}
-      <div className="cake-ring cake-ring-1" />
-      <div className="cake-ring cake-ring-2" />
-
-      {/* ── Animated Piping Bag ── */}
-      <svg className="deco-piping-bag" viewBox="0 0 80 175" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Twisted knot at top */}
-        <ellipse cx="40" cy="13" rx="11" ry="7" fill="#9D174D"/>
-        <path d="M29 13 Q35 6 40 10 Q45 6 51 13 Q45 10 40 12 Q35 10 29 13Z" fill="#7C1230" opacity="0.7"/>
-        {/* Gather band */}
-        <ellipse cx="40" cy="27" rx="19" ry="8" fill="#EC4899"/>
-        {/* Bag body */}
-        <path d="M21 27 Q7 78 37 140 Q38.5 143 40 144 Q41.5 143 43 140 Q73 78 59 27 Q51 21 40 19 Q29 21 21 27Z" fill="#F472B6"/>
-        {/* Highlight sheen */}
-        <path d="M29 33 Q21 74 30 122" stroke="white" strokeWidth="4" strokeLinecap="round" opacity="0.28" fill="none"/>
-        {/* Metal coupler */}
-        <ellipse cx="40" cy="144" rx="9" ry="5" fill="#D1D5DB"/>
-        <ellipse cx="40" cy="142" rx="7" ry="3.5" fill="#E5E7EB"/>
-        {/* Star tip */}
-        <path d="M34 147 L37 152 L40 155 L43 152 L46 147 L40 149 Z" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="0.8"/>
-        <line x1="40" y1="147" x2="40" y2="155" stroke="#9CA3AF" strokeWidth="0.8"/>
-        <line x1="34" y1="149" x2="46" y2="153" stroke="#9CA3AF" strokeWidth="0.5"/>
-        <line x1="46" y1="149" x2="34" y2="153" stroke="#9CA3AF" strokeWidth="0.5"/>
-        {/* Frosting rosette being piped */}
-        <path d="M40 155 Q46 161 41 166 Q36 161 40 155Z" fill="white" opacity="0.9"/>
-        <path d="M40 158 Q45 165 40 170 Q35 165 40 158Z" fill="white" opacity="0.75"/>
-        <circle cx="40" cy="163" r="3.5" fill="white" opacity="0.6"/>
-      </svg>
-
-      {/* ── Animated Stand Mixer ── */}
-      <svg className="deco-mixer" viewBox="0 0 110 132" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Drop shadow */}
-        <ellipse cx="56" cy="126" rx="33" ry="5" fill="rgba(80,7,36,0.12)"/>
-        {/* Bowl */}
-        <path d="M22 93 Q22 118 56 118 Q90 118 90 93 Z" fill="#FBCFE8"/>
-        <ellipse cx="56" cy="93" rx="34" ry="10" fill="#F9A8D4"/>
-        {/* Bowl rim highlight */}
-        <path d="M28 98 Q28 112 56 112" stroke="white" strokeWidth="2.5" fill="none" opacity="0.4" strokeLinecap="round"/>
-        {/* Bowl handle */}
-        <path d="M90 100 Q100 100 100 106 Q100 112 90 112" stroke="#F9A8D4" strokeWidth="4" fill="none" strokeLinecap="round"/>
-        {/* Stand column */}
-        <rect x="50" y="63" width="13" height="34" rx="5" fill="#EC4899"/>
-        {/* Mixer head */}
-        <rect x="22" y="10" width="64" height="50" rx="16" fill="#EC4899"/>
-        {/* Head top shine */}
-        <path d="M30 17 Q30 13 56 13 Q78 13 82 21" stroke="white" strokeWidth="2" fill="none" opacity="0.22" strokeLinecap="round"/>
-        {/* Speed knob */}
-        <circle cx="76" cy="35" r="9" fill="#BE185D"/>
-        <circle cx="76" cy="35" r="5.5" fill="#9D174D"/>
-        <line x1="76" y1="29" x2="76" y2="25" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-        {/* Brand S */}
-        <text x="41" y="42" fontFamily="Georgia, serif" fontSize="15" fontWeight="900" fill="white" opacity="0.3">S</text>
-        {/* Mixer arm */}
-        <path d="M38 58 Q27 71 31 86 Q34 95 50 97" stroke="#BE185D" strokeWidth="9" fill="none" strokeLinecap="round"/>
-        <path d="M38 58 Q27 71 31 86 Q34 95 50 97" stroke="#F9A8D4" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.45"/>
-        {/* Whisk — spins via CSS */}
-        <g className="mixer-whisk">
-          <line x1="56" y1="97" x2="56" y2="76" stroke="#BE185D" strokeWidth="2.5" strokeLinecap="round"/>
-          <line x1="56" y1="97" x2="65" y2="79" stroke="#BE185D" strokeWidth="2" strokeLinecap="round"/>
-          <line x1="56" y1="97" x2="47" y2="79" stroke="#BE185D" strokeWidth="2" strokeLinecap="round"/>
-          <line x1="56" y1="97" x2="66" y2="90" stroke="#BE185D" strokeWidth="1.5" strokeLinecap="round"/>
-          <line x1="56" y1="97" x2="46" y2="90" stroke="#BE185D" strokeWidth="1.5" strokeLinecap="round"/>
-        </g>
-        {/* Batter swirl */}
-        <path d="M43 108 Q50 103 56 108 Q62 103 69 108" stroke="#F472B6" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.55"/>
-      </svg>
-
-      {/* Floating confetti dots */}
-      {[
-        { cx: '15%', cy: '18%', r: 6, delay: '0s',   dur: '4.2s', color: '#F9A8D4' },
-        { cx: '82%', cy: '22%', r: 4, delay: '0.7s', dur: '3.8s', color: '#FCD34D' },
-        { cx: '10%', cy: '65%', r: 5, delay: '1.1s', dur: '5s',   color: '#A78BFA' },
-        { cx: '88%', cy: '58%', r: 7, delay: '0.3s', dur: '4.6s', color: '#6EE7B7' },
-        { cx: '50%', cy: '8%',  r: 4, delay: '1.8s', dur: '3.5s', color: '#FCA5A5' },
-        { cx: '70%', cy: '80%', r: 5, delay: '0.9s', dur: '4.9s', color: '#F9A8D4' },
-        { cx: '25%', cy: '88%', r: 4, delay: '1.4s', dur: '4.3s', color: '#FCD34D' },
-        { cx: '92%', cy: '38%', r: 3, delay: '2.1s', dur: '3.7s', color: '#A78BFA' },
-      ].map((p, i) => (
-        <div key={i} className="cake-particle" style={{
-          left: p.cx, top: p.cy,
-          width: p.r * 2, height: p.r * 2,
-          background: p.color,
-          animationDuration: p.dur,
-          animationDelay: p.delay,
-        }} />
-      ))}
-
-      {/* Floating sparkle stars */}
-      {[
-        { x: '20%', y: '30%', delay: '0s',   size: 18 },
-        { x: '75%', y: '15%', delay: '1.2s', size: 14 },
-        { x: '85%', y: '70%', delay: '0.5s', size: 16 },
-        { x: '12%', y: '50%', delay: '1.8s', size: 12 },
-        { x: '55%', y: '85%', delay: '0.8s', size: 10 },
-      ].map((s, i) => (
-        <svg key={i} className="cake-sparkle" style={{ left: s.x, top: s.y, width: s.size, height: s.size, animationDelay: s.delay }} viewBox="0 0 24 24" fill="none">
-          <path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="#FCD34D" opacity="0.9"/>
-        </svg>
-      ))}
-
-      {/* Real cake photo */}
-      <img src="/cake-hero.png" className="hero-cake-img" alt="Shug's custom celebration cake" />
-
-      {/* Floating label bubbles */}
-      <div className="cake-label cake-label-1"><span>🧈</span> Real Butter</div>
-      <div className="cake-label cake-label-2"><span>✨</span> Handcrafted</div>
-      <div className="cake-label cake-label-3"><span>🌸</span> Made Fresh</div>
-    </div>
-  );
-}
-
 function Home() {
   return (
     <div className="home-page">
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="hero">
-        <div className="hero-motion-panel">
-          <HeroCakeGraphic />
+        <div className="hero-image-panel">
+          <img
+            src="https://placehold.co/800x900/fce7f3/be185d?text=Cake+Photo"
+            alt="Placeholder cake photo"
+            className="hero-photo"
+          />
         </div>
 
         <div className="hero-text-panel">
