@@ -159,7 +159,7 @@
   border-radius: 14px;
   font-size: 0.95rem;
   font-family: 'Outfit', sans-serif;
-  background: var(--p50);
+  background: #ffffff;
   color: var(--dark);
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
