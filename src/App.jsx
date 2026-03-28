@@ -1,4 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Toaster } from './components/Toaster';
@@ -16,15 +26,18 @@ import Account from './pages/Account';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminOrderDetail from './pages/AdminOrderDetail';
+import ThemeEditor from './pages/ThemeEditor';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Toaster />
       <Routes>
-        {/* Admin Routes (no header/footer) */}
+        {/* Tool Routes (no header/footer) */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/order/:orderId" element={<AdminOrderDetail />} />
+        <Route path="/theme-editor" element={<ThemeEditor />} />
 
         {/* Public Routes with Layout */}
         <Route path="/" element={

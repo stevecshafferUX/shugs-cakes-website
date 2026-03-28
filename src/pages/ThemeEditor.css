@@ -1,0 +1,524 @@
+/* ============================================================
+   THEME EDITOR — standalone tool chrome
+   Uses hard-coded editor shell colors (not CSS vars) so the
+   UI doesn't mutate when you edit the site's design tokens.
+   Only the PREVIEW pane uses the site's CSS custom properties.
+   ============================================================ */
+
+/* ── Editor shell palette ────────────────────────────────────────────────── */
+.te-root {
+  --te-bg:        #111016;
+  --te-surface:   #1b1820;
+  --te-surface2:  #231f2b;
+  --te-border:    #302b38;
+  --te-border2:   #3e384a;
+  --te-text:      #e2d9ee;
+  --te-muted:     #8b7fa0;
+  --te-accent:    #d97aaa;
+  --te-accent2:   #b85c87;
+  --te-success:   #6fcf97;
+  --te-code-bg:   #0d0b11;
+  --te-radius:    8px;
+  --te-sidebar-w: 340px;
+  --te-topbar-h:  56px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--te-bg);
+  color: var(--te-text);
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────────── */
+.te-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  height: var(--te-topbar-h);
+  background: var(--te-surface);
+  border-bottom: 1px solid var(--te-border);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.te-topbar::-webkit-scrollbar { display: none; }
+
+.te-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.te-brand-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+.te-brand-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--te-text);
+  line-height: 1.2;
+}
+.te-brand-sub {
+  font-size: 10px;
+  color: var(--te-muted);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.te-preset-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.te-preset-strip::-webkit-scrollbar { display: none; }
+
+.te-preset-label {
+  font-size: 11px;
+  color: var(--te-muted);
+  flex-shrink: 0;
+  margin-right: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.te-preset-btn {
+  padding: 5px 12px;
+  border-radius: 50px;
+  border: 1px solid var(--te-border2);
+  background: transparent;
+  color: var(--te-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.te-preset-btn:hover {
+  border-color: var(--te-accent);
+  color: var(--te-accent);
+  background: rgba(217, 122, 170, 0.06);
+}
+.te-preset-btn--active {
+  background: var(--te-accent);
+  border-color: var(--te-accent);
+  color: #fff;
+}
+.te-preset-btn--active:hover {
+  background: var(--te-accent2);
+  border-color: var(--te-accent2);
+  color: #fff;
+}
+
+.te-topbar-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.te-action-btn {
+  padding: 6px 14px;
+  border-radius: var(--te-radius);
+  border: 1px solid var(--te-border2);
+  background: transparent;
+  color: var(--te-text);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.te-action-btn:hover {
+  border-color: var(--te-accent);
+  color: var(--te-accent);
+}
+.te-action-btn--active {
+  background: rgba(217, 122, 170, 0.12);
+  border-color: var(--te-accent);
+  color: var(--te-accent);
+}
+
+/* ── Export panel ────────────────────────────────────────────────────────── */
+.te-export-panel {
+  background: var(--te-code-bg);
+  border-bottom: 1px solid var(--te-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.te-export-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  gap: 12px;
+  border-bottom: 1px solid var(--te-border);
+  font-size: 12px;
+  color: var(--te-muted);
+}
+.te-export-header code {
+  background: var(--te-surface);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: var(--te-accent);
+  font-size: 11px;
+}
+
+.te-copy-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  background: var(--te-accent);
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.te-copy-btn:hover { background: var(--te-accent2); }
+
+.te-export-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--te-code-bg);
+  border: none;
+  color: #a3e4a3;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 11.5px;
+  line-height: 1.7;
+  padding: 12px 16px;
+  resize: none;
+  outline: none;
+}
+
+/* ── Body layout ─────────────────────────────────────────────────────────── */
+.te-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+.te-sidebar {
+  width: var(--te-sidebar-w);
+  flex-shrink: 0;
+  background: var(--te-surface);
+  border-right: 1px solid var(--te-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.te-sidebar-inner {
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--te-border2) transparent;
+}
+.te-sidebar-inner::-webkit-scrollbar { width: 4px; }
+.te-sidebar-inner::-webkit-scrollbar-thumb {
+  background: var(--te-border2);
+  border-radius: 4px;
+}
+
+/* ── Token groups ────────────────────────────────────────────────────────── */
+.te-group {
+  border-bottom: 1px solid var(--te-border);
+}
+
+.te-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: var(--te-text);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.03em;
+  transition: background 0.1s;
+}
+.te-group-header:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.te-chevron {
+  display: inline-block;
+  font-size: 16px;
+  color: var(--te-muted);
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+.te-chevron--open {
+  transform: rotate(270deg);
+}
+
+/* ── Token rows ──────────────────────────────────────────────────────────── */
+.te-token-list {
+  padding: 4px 0 8px;
+}
+
+.te-token-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 14px;
+  transition: background 0.1s;
+}
+.te-token-row:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.te-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.te-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px rgba(217, 122, 170, 0.5);
+}
+
+.te-color-input-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.te-token-meta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 1px;
+}
+
+.te-token-name {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--te-accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.te-token-label {
+  font-size: 10px;
+  color: var(--te-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Text-type swatch (non-color tokens like --btn-radius) */
+.te-swatch--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  background: var(--te-surface2) !important;
+  border-color: var(--te-border2) !important;
+}
+.te-swatch-icon {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--te-muted);
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.03em;
+  pointer-events: none;
+}
+
+/* Quick-pick hint chips (e.g. border-radius presets) */
+.te-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.te-hint-chip {
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--te-border2);
+  background: transparent;
+  color: var(--te-muted);
+  font-size: 10px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  line-height: 1.5;
+}
+.te-hint-chip:hover {
+  border-color: var(--te-accent);
+  color: var(--te-accent);
+}
+.te-hint-chip--active {
+  background: rgba(217, 122, 170, 0.15);
+  border-color: var(--te-accent);
+  color: var(--te-accent);
+}
+
+.te-value-input {
+  width: 110px;
+  flex-shrink: 0;
+  background: var(--te-surface2);
+  border: 1px solid var(--te-border2);
+  border-radius: 5px;
+  color: var(--te-text);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10.5px;
+  padding: 4px 7px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.te-value-input:focus {
+  border-color: var(--te-accent);
+}
+
+/* ── Preview pane ────────────────────────────────────────────────────────── */
+.te-preview-pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: hsl(var(--background, 340 100% 99%));
+  overflow: hidden;
+}
+
+.te-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid hsl(var(--border, 340 60% 90%));
+  font-size: 12px;
+  font-weight: 700;
+  color: hsl(var(--foreground, 330 50% 12%));
+  flex-shrink: 0;
+  background: hsl(var(--card, 0 0% 100%));
+}
+.te-preview-hint {
+  font-size: 11px;
+  font-weight: 400;
+  color: hsl(var(--muted-foreground, 330 30% 50%));
+}
+
+.te-preview-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.te-preview-scroll::-webkit-scrollbar { width: 6px; }
+.te-preview-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+/* ── Preview content ─────────────────────────────────────────────────────── */
+.te-preview-inner {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.te-section {}
+
+.te-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--muted-foreground, 330 30% 50%));
+  margin: 0 0 8px;
+}
+
+.te-preview-card {
+  background: hsl(var(--card, 0 0% 100%));
+  border: 1px solid hsl(var(--border, 340 60% 90%));
+  border-radius: var(--radius, 1rem);
+  padding: 16px 18px;
+}
+
+/* ── Color palette strip ─────────────────────────────────────────────────── */
+.te-palette-strip {
+  display: flex;
+  border-radius: var(--radius, 1rem);
+  overflow: hidden;
+  height: 52px;
+}
+
+.te-palette-cell {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 5px;
+  position: relative;
+}
+.te-palette-cell--brand {
+  border-radius: 0;
+}
+
+.te-palette-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* ── UI token swatches ───────────────────────────────────────────────────── */
+.te-ui-swatches {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.te-ui-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.te-ui-swatch-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+}
+.te-ui-swatch-label {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+}
