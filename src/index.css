@@ -27,6 +27,17 @@
   --mid:       #7D3F5E;
   --soft:      #C48BA0;
 
+  /* Button tokens — editable in /theme-editor */
+  --btn-primary-from:     #EC4899;  /* gradient start  (default: p500) */
+  --btn-primary-to:       #BE185D;  /* gradient end    (default: p700) */
+  --btn-primary-color:    #ffffff;  /* text color */
+  --btn-primary-shadow:   rgba(190, 24, 93, 0.30);
+  --btn-primary-shadow-h: rgba(190, 24, 93, 0.45);
+  --btn-secondary-text:   #BE185D;  /* text + icon color (default: p700) */
+  --btn-secondary-border: #FF8FAB;  /* border color     (default: p300) */
+  --btn-secondary-hover:  #FFF0F5;  /* hover background (default: p50)  */
+  --btn-radius:           50px;     /* pill = 50px, rounded = 12px, square = 4px */
+
   /* Compatibility aliases used by existing page CSS */
   --warm-white:       #FFF5F7;
   --dark-brown:       #2A1020;
@@ -196,25 +207,25 @@ body::before {
   align-items: center;
   gap: 8px;
   padding: 14px 32px;
-  border-radius: 50px;
+  border-radius: var(--btn-radius, 50px);
   border: none;
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
   font-size: 15px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--p500), var(--p700));
-  color: white;
+  background: linear-gradient(135deg, var(--btn-primary-from, var(--p500)), var(--btn-primary-to, var(--p700)));
+  color: var(--btn-primary-color, #ffffff);
   letter-spacing: 0.3px;
-  box-shadow: 0 8px 28px rgba(190, 24, 93, 0.3);
+  box-shadow: 0 8px 28px var(--btn-primary-shadow, rgba(190, 24, 93, 0.30));
   transition: all 0.25s ease;
   text-decoration: none;
 }
 .btn-primary:hover,
 .cta-button.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(190, 24, 93, 0.4);
+  box-shadow: 0 14px 36px var(--btn-primary-shadow-h, rgba(190, 24, 93, 0.45));
   filter: brightness(1.08);
-  color: white;
+  color: var(--btn-primary-color, #ffffff);
 }
 
 .btn-secondary,
@@ -224,24 +235,24 @@ body::before {
   align-items: center;
   gap: 8px;
   padding: 13px 30px;
-  border-radius: 50px;
+  border-radius: var(--btn-radius, 50px);
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
   font-size: 15px;
   font-weight: 600;
   background: transparent;
-  color: var(--p700);
-  border: 2px solid var(--p300);
+  color: var(--btn-secondary-text, var(--p700));
+  border: 2px solid var(--btn-secondary-border, var(--p300));
   transition: all 0.25s ease;
   text-decoration: none;
 }
 .btn-secondary:hover,
 .cta-button.secondary:hover,
 .btn-outline:hover {
-  background: var(--p50);
-  border-color: var(--p600);
+  background: var(--btn-secondary-hover, var(--p50));
+  border-color: var(--btn-secondary-border, var(--p300));
   transform: translateY(-1px);
-  color: var(--p700);
+  color: var(--btn-secondary-text, var(--p700));
 }
 
 /* Generic cta-button (outline variant) */
