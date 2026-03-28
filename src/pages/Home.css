@@ -1,36 +1,9 @@
 .home-page {
   min-height: calc(100vh - 200px);
-  background: var(--cream);
+  background: #ffffff;
 }
 
-/* ── HERO ─────────────────────────────────── */
-.hero {
-  display: grid;
-  grid-template-columns: 55fr 45fr;
-  min-height: 90vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-image-panel {
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── HERO MOTION GRAPHIC ──────────────────── */
-.hero-motion-panel {
-  position: relative;
-  overflow: hidden;
-  background: radial-gradient(ellipse 110% 90% at 40% 55%,
-    #fce7f3 0%,
-    #fbcfe8 30%,
-    #f9a8d4 60%,
-    #ec4899 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ── HERO (old standalone layout — removed, now in bento) ── */
 
 .cake-graphic {
   position: relative;
@@ -101,29 +74,6 @@
   to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Floating confetti particles */
-.cake-particle {
-  position: absolute;
-  border-radius: 50%;
-  animation: particleFloat 4s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-  50%       { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-}
-
-/* Sparkle stars */
-.cake-sparkle {
-  position: absolute;
-  animation: sparkle 3s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
-  50%       { opacity: 1;   transform: scale(1.2) rotate(20deg); }
-}
-
 /* Hero cake photo */
 .hero-cake-img {
   position: relative;
@@ -131,7 +81,7 @@
   width: clamp(200px, 52%, 320px);
   height: auto;
   filter: drop-shadow(0 24px 48px rgba(80, 7, 36, 0.3));
-  animation: cakeBob 5s ease-in-out infinite;
+  animation: cakeBob 6s ease-in-out infinite;
 }
 
 @keyframes cakeBob {
@@ -139,48 +89,27 @@
   50%       { transform: translateY(-14px); }
 }
 
-/* Decorative piping bag */
-.deco-piping-bag {
-  position: absolute;
-  top: 10%;
-  left: 7%;
-  width: 64px;
+/* ── Single-line baking icon decorations ── */
+.baking-icon {
+  pointer-events: none;
   z-index: 3;
-  filter: drop-shadow(0 6px 16px rgba(190, 24, 93, 0.3));
-  animation: pipingFloat 4.5s ease-in-out infinite;
 }
 
-@keyframes pipingFloat {
-  0%, 100% { transform: rotate(-22deg) translateY(0px); }
-  50%       { transform: rotate(-15deg) translateY(-14px); }
-}
+.icon-float-1 { animation: iconFloat1 ease-in-out infinite; }
+.icon-float-2 { animation: iconFloat2 ease-in-out infinite; }
+.icon-float-3 { animation: iconFloat3 ease-in-out infinite; }
 
-/* Decorative stand mixer */
-.deco-mixer {
-  position: absolute;
-  bottom: 7%;
-  right: 3%;
-  width: 88px;
-  z-index: 3;
-  filter: drop-shadow(0 6px 16px rgba(190, 24, 93, 0.3));
-  animation: mixerFloat 5.5s ease-in-out infinite;
+@keyframes iconFloat1 {
+  0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0px); }
+  50%       { transform: rotate(var(--rot, 0deg)) translateY(-10px); }
 }
-
-@keyframes mixerFloat {
-  0%, 100% { transform: translateY(0px) rotate(3deg); }
-  50%       { transform: translateY(-12px) rotate(-1deg); }
+@keyframes iconFloat2 {
+  0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(-4px); }
+  50%       { transform: rotate(var(--rot, 0deg)) translateY(8px); }
 }
-
-/* Whisk spin */
-.mixer-whisk {
-  animation: whiskyWhirl 1.8s linear infinite;
-  transform-origin: 56px 97px;
-  transform-box: fill-box;
-}
-
-@keyframes whiskyWhirl {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+@keyframes iconFloat3 {
+  0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0px); }
+  50%       { transform: rotate(var(--rot, 0deg)) translateY(-8px); }
 }
 
 /* Floating label badges */
@@ -256,11 +185,11 @@
   overflow: hidden;
 }
 
-/* Floating dots */
+/* Floating dots — light pink on white cell */
 .hero-dot {
   position: absolute;
   border-radius: 50%;
-  background: var(--p300);
+  background: var(--p200);
   animation: float 6s ease-in-out infinite;
   pointer-events: none;
 }
@@ -596,7 +525,515 @@
   color: white;
 }
 
+/* ── BENTO GRID ───────────────────────────── */
+.bento-section {
+  padding: 16px 16px 80px;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 14px;
+}
+
+/* ── BASE CELL ── */
+.bento-cell {
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  /*
+   * 3D low-contrast gradient: light source top-left → surface curves away bottom-right.
+   * The ~6% lightness shift is enough to feel dimensional without looking painted.
+   */
+  background: linear-gradient(
+    150deg,
+    #FFF8FB 0%,
+    #FDF2F7 45%,
+    #FAE8F2 100%
+  );
+  border: 1px solid rgba(236, 172, 203, 0.35);
+  /* Inset shadow reinforces the recessed-surface illusion */
+  box-shadow:
+    inset 3px 3px 10px rgba(190, 100, 140, 0.08),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.85);
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+.bento-cell:hover {
+  background: linear-gradient(
+    150deg,
+    #FFF5F9 0%,
+    #FCEDF5 45%,
+    #F8E1EE 100%
+  );
+  box-shadow:
+    inset 5px 5px 15px rgba(190, 100, 140, 0.11),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+/* Remove old rim pseudo-element */
+.bento-cell::before { display: none; }
+
+/* ── HERO TEXT CELL ── */
+.bento-hero-text {
+  grid-column: 1 / 7;
+  grid-row: 1 / 3;
+  /* White — inherits base cell shadow */
+  padding: 52px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+}
+
+/* Subtle pink left-edge accent line */
+.bento-hero-text::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, var(--p400), var(--p600));
+  opacity: 0.7;
+}
+
+.bento-hero-eyebrow {
+  color: var(--p500) !important;
+  margin-bottom: 14px;
+}
+.bento-hero-eyebrow::before,
+.bento-hero-eyebrow::after {
+  background: var(--p300) !important;
+}
+
+.bento-hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+  font-weight: 900;
+  color: #111827;
+  margin: 0 0 14px 0;
+  line-height: 1.1;
+}
+
+.bento-hero-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0 0 28px 0;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.bento-hero-actions {
+  margin-bottom: 28px !important;
+}
+
+.bento-hero-badges {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bento-hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9CA3AF !important;
+}
+
+/* ── HERO VIDEO CELL ── */
+.bento-hero-video {
+  grid-column: 7 / 10;
+  grid-row: 1 / 3;
+  padding: 0;
+  min-height: 440px;
+  cursor: default;
+}
+
+.bento-hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(80, 7, 36, 0.52) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-video-badge {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #1E293B;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(80, 7, 36, 0.18);
+}
+
+/* ── CAKE ANIMATION CELL ── */
+.bento-cake-anim {
+  grid-column: 6 / 10;
+  grid-row: 1 / 3;
+  background: radial-gradient(ellipse 110% 90% at 40% 55%,
+    #fce7f3 0%, #fbcfe8 30%, #f9a8d4 60%, #ec4899 100%);
+  box-shadow:
+    0 20px 50px rgba(80,7,36,0.25),
+    0 6px 16px rgba(80,7,36,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  overflow: hidden;
+  position: relative;
+  min-height: 440px;
+}
+
+.bento-cake-anim .cake-graphic {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+}
+
+/* ── STORY CELL (row 3) ── */
+.bento-story {
+  grid-column: 1 / 5;
+  grid-row: 3 / 4;
+  /* white — inherits base cell shadow */
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 220px;
+}
+
+.bento-story-icon {
+  width: 90px;
+  margin-bottom: 24px;
+}
+
+.bento-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #DB2777;
+  margin-bottom: 10px;
+}
+
+.bento-eyebrow--light {
+  color: var(--p500);
+}
+
+.bento-story-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 900;
+  color: #1E293B;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.bento-story-heading em {
+  color: #DB2777;
+  font-style: italic;
+}
+
+.bento-story-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #64748B;
+  margin-bottom: 20px;
+}
+
+.bento-values-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bento-value-pill {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9D174D;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(236, 172, 203, 0.5);
+  border-radius: 50px;
+  padding: 5px 12px;
+}
+
+/* ── STAT CELLS ── */
+.bento-stat {
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.bento-stat-icon {
+  width: 52px;
+  margin-bottom: 12px;
+}
+.bento-stat-icon--sm { width: 44px; }
+
+.bento-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--dark);
+}
+.bento-stat-num--alt { color: var(--p700); }
+.bento-stat-num--gold { color: #92400E; }
+
+.bento-stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  color: var(--mid);
+}
+
+.bento-stat-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  color: var(--soft);
+  margin-top: 2px;
+}
+
+/* Years stat — white */
+.bento-stat-years {
+  grid-column: 10 / 13;
+  grid-row: 1 / 2;
+  /* inherits white + inset shadow from .bento-cell */
+}
+
+/* Cakes stat — pink number accent */
+.bento-stat-cakes {
+  grid-column: 10 / 13;
+  grid-row: 2 / 3;
+}
+.bento-stat-cakes .bento-stat-num { color: var(--p600); }
+
+/* Scratch stat — white */
+.bento-stat-scratch {
+  grid-column: 5 / 9;
+  grid-row: 3 / 4;
+}
+
+/* Rating stat — gold number accent */
+.bento-stat-rating {
+  grid-column: 9 / 13;
+  grid-row: 3 / 4;
+}
+.bento-stat-rating .bento-stat-num { color: #D97706; }
+.bento-stat-rating .bento-stat-label { color: #92400E; }
+
+/* ── CUSTOM ORDERS CELL ── */
+.bento-custom {
+  grid-column: 1 / 7;
+  grid-row: 4 / 5;
+  /* white — inherits inset shadow */
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 32px;
+}
+
+.bento-custom-icon {
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.bento-custom-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.bento-custom-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #6B7280;
+  margin-bottom: 16px;
+}
+
+.bento-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--p600);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 9px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(190,24,93,0.25);
+  transition: all 0.2s ease;
+}
+.bento-cta-btn:hover {
+  background: var(--p700);
+  box-shadow: 0 6px 20px rgba(190,24,93,0.35);
+  color: white;
+}
+
+/* ── HOURS CELL ── */
+.bento-hours {
+  grid-column: 7 / 10;
+  grid-row: 4 / 5;
+  /* white — inherits inset shadow */
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bento-hours-icon {
+  width: 42px;
+  margin-bottom: 14px;
+}
+
+.bento-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.bento-hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.bento-hours-day {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.bento-hours-time {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  color: var(--p600);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── LOCATION CELL ── */
+.bento-location {
+  grid-column: 10 / 13;
+  grid-row: 4 / 5;
+  /* inherits 3D pink gradient from .bento-cell */
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bento-location-icon {
+  width: 36px;
+  margin-bottom: 12px;
+}
+
+.bento-location-city {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-top: 8px;
+}
+
+.bento-location-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  color: var(--soft);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
 /* ── RESPONSIVE ───────────────────────────── */
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(6, 1fr); }
+
+  /* Hero video hidden at tablet — grid doesn't have room */
+  .bento-hero-video { display: none; }
+
+  /* Hero spans full 6 cols, row 1 */
+  .bento-hero-text { grid-column: 1 / 7; grid-row: 1; min-height: 300px; padding: 36px 36px; }
+  .bento-hero-text::after { display: none; }
+
+  /* Story, stats flow below */
+  .bento-story    { grid-column: 1 / 4; grid-row: 2; min-height: 220px; justify-content: flex-start; }
+  .bento-story-icon { width: 60px; }
+  .bento-stat-years  { grid-column: 4 / 5; grid-row: 2; }
+  .bento-stat-cakes  { grid-column: 5 / 7; grid-row: 2; }
+  .bento-stat-scratch{ grid-column: 1 / 3; grid-row: 3; }
+  .bento-stat-rating { grid-column: 3 / 5; grid-row: 3; }
+  .bento-custom      { grid-column: 5 / 7; grid-row: 3; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .bento-hours       { grid-column: 1 / 4; grid-row: 4; }
+  .bento-location    { grid-column: 4 / 7; grid-row: 4; }
+}
+
+@media (max-width: 768px) {
+  .bento-section { padding: 12px 12px 60px; }
+  .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Hero video hidden at mobile */
+  .bento-hero-video { display: none; }
+
+  /* Hero full width, row 1 */
+  .bento-hero-text { grid-column: 1 / 3; grid-row: 1; min-height: 240px; padding: 28px 24px; }
+  .bento-hero-h1   { font-size: 2.1rem; }
+
+  .bento-story    { grid-column: 1 / 3; grid-row: 2; flex-direction: column; align-items: flex-start; min-height: 240px; }
+  .bento-story-icon { width: 56px; }
+  .bento-stat-years  { grid-column: 1 / 2; grid-row: 3; }
+  .bento-stat-cakes  { grid-column: 2 / 3; grid-row: 3; }
+  .bento-stat-scratch{ grid-column: 1 / 2; grid-row: 4; }
+  .bento-stat-rating { grid-column: 2 / 3; grid-row: 4; }
+  .bento-custom      { grid-column: 1 / 3; grid-row: 5; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .bento-custom-icon { width: 48px; }
+  .bento-hours       { grid-column: 1 / 2; grid-row: 6; }
+  .bento-location    { grid-column: 2 / 3; grid-row: 6; }
+}
+
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
