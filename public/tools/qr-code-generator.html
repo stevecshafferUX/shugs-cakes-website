@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>QR Code Generator — Shug's Cakes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --p50:  #FFF0F5;
+    --p100: #FFD6E7;
+    --p200: #FFB3CE;
+    --p300: #FF8FAB;
+    --p500: #EC4899;
+    --p600: #DB2777;
+    --p700: #BE185D;
+    --p900: #500724;
+    --gold: #D4A853;
+    --cream: #FFFBFC;
+    --off-white: #FFF5F7;
+    --dark: #2A1020;
+    --mid: #7D3F5E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(180deg, var(--off-white), var(--cream));
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 2rem 1.5rem 1rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 0 0 0.35rem;
+    background: linear-gradient(135deg, var(--p600), var(--p700));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--mid);
+    font-size: 0.95rem;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+    gap: 1.5rem;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: #fff;
+    border: 1px solid var(--p100);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(190, 24, 93, 0.06);
+  }
+
+  .panel h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--p700);
+    margin: 0 0 1rem;
+  }
+
+  .field {
+    margin-bottom: 1.1rem;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .field .hint {
+    font-size: 0.75rem;
+    color: var(--mid);
+    margin-top: 0.3rem;
+  }
+
+  input[type="text"],
+  input[type="url"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--p200);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: var(--off-white);
+    color: var(--dark);
+  }
+
+  input[type="text"]:focus,
+  input[type="url"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--p500);
+    background: #fff;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .color-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--p200);
+    border-radius: 10px;
+    background: var(--off-white);
+  }
+
+  .color-field input[type="color"] {
+    width: 34px;
+    height: 34px;
+    border: none;
+    padding: 0;
+    background: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .color-field span {
+    font-size: 0.8rem;
+    color: var(--mid);
+  }
+
+  .presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .preset-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--p200);
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+
+  .preset-btn:hover { border-color: var(--p500); transform: translateY(-1px); }
+  .preset-btn.active { border-color: var(--p600); background: var(--p50); color: var(--p700); }
+
+  .swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .switch {
+    position: relative;
+    width: 42px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .switch input { opacity: 0; width: 0; height: 0; }
+
+  .slider {
+    position: absolute;
+    inset: 0;
+    background: var(--p200);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.15s;
+  }
+
+  .switch input:checked + .slider { background: var(--p600); }
+  .switch input:checked + .slider::before { transform: translateX(18px); }
+
+  .file-drop {
+    border: 1.5px dashed var(--p300);
+    border-radius: 10px;
+    padding: 0.9rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--mid);
+    background: var(--off-white);
+    cursor: pointer;
+  }
+
+  .file-drop:hover { border-color: var(--p500); }
+
+  .logo-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--mid);
+  }
+
+  .logo-preview img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid var(--p200);
+    background: #fff;
+    padding: 2px;
+  }
+
+  .logo-preview button {
+    border: none;
+    background: none;
+    color: var(--p700);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .preview-panel {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+    text-align: center;
+  }
+
+  #qr-canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    margin-bottom: 1rem;
+  }
+
+  #qr-canvas canvas, #qr-canvas img, #qr-canvas svg {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .downloads {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .downloads button {
+    padding: 0.6rem 0.4rem;
+    border-radius: 10px;
+    border: 1px solid var(--p300);
+    background: #fff;
+    color: var(--p700);
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .downloads button:hover { background: var(--p50); }
+
+  .downloads button.primary {
+    background: linear-gradient(135deg, var(--p500), var(--p700));
+    color: #fff;
+    border: none;
+  }
+
+  .downloads button.primary:hover { filter: brightness(1.05); }
+
+  .scan-note {
+    margin-top: 0.9rem;
+    font-size: 0.75rem;
+    color: var(--mid);
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    color: var(--mid);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>QR Code Generator</h1>
+  <p>Create a branded QR code for any Shug's Cakes link — customize the shape, colors, and logo.</p>
+</header>
+
+<div class="layout">
+  <div class="panel">
+    <h2>Link</h2>
+    <div class="field">
+      <label for="url">Destination URL</label>
+      <input type="url" id="url" placeholder="https://www.shugscakes.com" value="https://www.shugscakes.com" />
+      <div class="hint">Where the QR code should send people — a page, menu, or order link.</div>
+    </div>
+
+    <h2>Brand</h2>
+    <div class="presets" id="brand-presets">
+      <button type="button" class="preset-btn active" data-preset="rose">
+        <span class="swatch" style="background:#BE185D"></span> Rose &amp; Gold
+      </button>
+      <button type="button" class="preset-btn" data-preset="blush">
+        <span class="swatch" style="background:#EC4899"></span> Blush Pink
+      </button>
+      <button type="button" class="preset-btn" data-preset="noir">
+        <span class="swatch" style="background:#2A1020"></span> Modern Noir
+      </button>
+      <button type="button" class="preset-btn" data-preset="classic">
+        <span class="swatch" style="background:#000000"></span> Classic B/W
+      </button>
+      <button type="button" class="preset-btn" data-preset="custom">
+        <span class="swatch" style="background:conic-gradient(from 0deg,#EC4899,#D4A853,#EC4899)"></span> Custom
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="fg-color">Foreground</label>
+        <div class="color-field">
+          <input type="color" id="fg-color" value="#BE185D" />
+          <span id="fg-color-label">#BE185D</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="bg-color">Background</label>
+        <div class="color-field">
+          <input type="color" id="bg-color" value="#FFFFFF" />
+          <span id="bg-color-label">#FFFFFF</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="toggle-row">
+        <label for="gradient-toggle" style="margin-bottom:0;">Gradient foreground</label>
+        <label class="switch">
+          <input type="checkbox" id="gradient-toggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field" id="gradient-end-field" style="display:none;">
+      <label for="fg-color-2">Gradient end color</label>
+      <div class="color-field">
+        <input type="color" id="fg-color-2" value="#D4A853" />
+        <span id="fg-color-2-label">#D4A853</span>
+      </div>
+    </div>
+
+    <h2>Shape</h2>
+    <div class="row">
+      <div class="field">
+        <label for="dots-style">Dot style</label>
+        <select id="dots-style">
+          <option value="square">Square</option>
+          <option value="dots" selected>Dots</option>
+          <option value="rounded">Rounded</option>
+          <option value="classy">Classy</option>
+          <option value="classy-rounded">Classy Rounded</option>
+          <option value="extra-rounded">Extra Rounded</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="corner-style">Corner frame</label>
+        <select id="corner-style">
+          <option value="square">Square</option>
+          <option value="dot">Round dot</option>
+          <option value="extra-rounded" selected>Extra rounded</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="corner-dot-style">Corner center dot</label>
+      <select id="corner-dot-style">
+        <option value="square">Square</option>
+        <option value="dot" selected>Round</option>
+      </select>
+    </div>
+
+    <h2>Logo</h2>
+    <div class="field">
+      <div class="file-drop" id="file-drop">
+        Click to upload a logo image (PNG/SVG with transparent background works best)
+      </div>
+      <input type="file" id="logo-input" accept="image/*" style="display:none;" />
+      <div class="logo-preview" id="logo-preview" style="display:none;">
+        <img id="logo-preview-img" alt="Logo preview" />
+        <span id="logo-preview-name"></span>
+        <button type="button" id="logo-remove">Remove</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="toggle-row">
+        <label for="hide-dots-toggle" style="margin-bottom:0;">Clear space behind logo</label>
+        <label class="switch">
+          <input type="checkbox" id="hide-dots-toggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="hint">Keeps the QR code scannable when a logo covers the center.</div>
+    </div>
+
+    <h2>Output</h2>
+    <div class="row">
+      <div class="field">
+        <label for="size">Size (px)</label>
+        <input type="number" id="size" value="400" min="120" max="2000" step="10" />
+      </div>
+      <div class="field">
+        <label for="error-correction">Error correction</label>
+        <select id="error-correction">
+          <option value="L">Low (L)</option>
+          <option value="M">Medium (M)</option>
+          <option value="Q" selected>Quartile (Q)</option>
+          <option value="H">High (H)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel preview-panel">
+    <h2>Preview</h2>
+    <div id="qr-canvas"></div>
+    <div class="downloads">
+      <button type="button" class="primary" data-format="png">PNG</button>
+      <button type="button" data-format="svg">SVG</button>
+      <button type="button" data-format="jpeg">JPEG</button>
+    </div>
+    <div class="scan-note">Tip: after downloading, scan the code with your phone to confirm it opens the right link before printing.</div>
+  </div>
+</div>
+
+<footer>Shug's Cakes internal tool — QR codes are generated entirely in your browser; nothing is uploaded.</footer>
+
+<script src="./vendor/qr-code-styling.min.js"></script>
+<script>
+(function () {
+  var BRAND_PRESETS = {
+    rose:    { fg: '#BE185D', fg2: '#D4A853', bg: '#FFFFFF', gradient: false },
+    blush:   { fg: '#EC4899', fg2: '#BE185D', bg: '#FFF0F5', gradient: false },
+    noir:    { fg: '#2A1020', fg2: '#7D3F5E', bg: '#FFFFFF', gradient: false },
+    classic: { fg: '#000000', fg2: '#000000', bg: '#FFFFFF', gradient: false }
+  };
+
+  var urlInput = document.getElementById('url');
+  var fgColor = document.getElementById('fg-color');
+  var fgColorLabel = document.getElementById('fg-color-label');
+  var fgColor2 = document.getElementById('fg-color-2');
+  var fgColor2Label = document.getElementById('fg-color-2-label');
+  var bgColor = document.getElementById('bg-color');
+  var bgColorLabel = document.getElementById('bg-color-label');
+  var gradientToggle = document.getElementById('gradient-toggle');
+  var gradientEndField = document.getElementById('gradient-end-field');
+  var dotsStyle = document.getElementById('dots-style');
+  var cornerStyle = document.getElementById('corner-style');
+  var cornerDotStyle = document.getElementById('corner-dot-style');
+  var sizeInput = document.getElementById('size');
+  var errorCorrection = document.getElementById('error-correction');
+  var hideDotsToggle = document.getElementById('hide-dots-toggle');
+  var fileDrop = document.getElementById('file-drop');
+  var logoInput = document.getElementById('logo-input');
+  var logoPreview = document.getElementById('logo-preview');
+  var logoPreviewImg = document.getElementById('logo-preview-img');
+  var logoPreviewName = document.getElementById('logo-preview-name');
+  var logoRemoveBtn = document.getElementById('logo-remove');
+  var presetButtons = document.querySelectorAll('.preset-btn');
+  var qrContainer = document.getElementById('qr-canvas');
+
+  var logoDataUrl = null;
+  var qrCode = null;
+
+  function setPresetActive(name) {
+    presetButtons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.preset === name);
+    });
+  }
+
+  function applyPreset(name) {
+    var preset = BRAND_PRESETS[name];
+    if (!preset) { setPresetActive('custom'); return; }
+    fgColor.value = preset.fg;
+    fgColor2.value = preset.fg2;
+    bgColor.value = preset.bg;
+    gradientToggle.checked = preset.gradient;
+    gradientEndField.style.display = preset.gradient ? 'block' : 'none';
+    updateColorLabels();
+    setPresetActive(name);
+    render();
+  }
+
+  function updateColorLabels() {
+    fgColorLabel.textContent = fgColor.value.toUpperCase();
+    fgColor2Label.textContent = fgColor2.value.toUpperCase();
+    bgColorLabel.textContent = bgColor.value.toUpperCase();
+  }
+
+  function markCustom() {
+    setPresetActive('custom');
+  }
+
+  function buildOptions() {
+    var size = Math.max(120, Math.min(2000, parseInt(sizeInput.value, 10) || 400));
+    var dotsColorOptions = gradientToggle.checked
+      ? { gradient: { type: 'linear', rotation: Math.PI / 4, colorStops: [
+            { offset: 0, color: fgColor.value },
+            { offset: 1, color: fgColor2.value }
+          ] } }
+      : { color: fgColor.value };
+
+    var options = {
+      width: size,
+      height: size,
+      type: 'canvas',
+      data: urlInput.value.trim() || 'https://www.shugscakes.com',
+      margin: 12,
+      qrOptions: {
+        errorCorrectionLevel: errorCorrection.value
+      },
+      dotsOptions: Object.assign({ type: dotsStyle.value }, dotsColorOptions),
+      cornersSquareOptions: { type: cornerStyle.value, color: fgColor.value },
+      cornersDotOptions: { type: cornerDotStyle.value, color: fgColor.value },
+      backgroundOptions: { color: bgColor.value }
+    };
+
+    if (logoDataUrl) {
+      options.image = logoDataUrl;
+      options.imageOptions = {
+        crossOrigin: 'anonymous',
+        margin: 6,
+        imageSize: 0.4,
+        hideBackgroundDots: hideDotsToggle.checked
+      };
+    }
+
+    return options;
+  }
+
+  function render() {
+    var options = buildOptions();
+    if (!qrCode) {
+      qrCode = new QRCodeStyling(options);
+      qrContainer.innerHTML = '';
+      qrCode.append(qrContainer);
+    } else {
+      qrCode.update(options);
+    }
+  }
+
+  var renderTimer = null;
+  function scheduleRender() {
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(render, 120);
+  }
+
+  urlInput.addEventListener('input', scheduleRender);
+  [dotsStyle, cornerStyle, cornerDotStyle, errorCorrection].forEach(function (el) {
+    el.addEventListener('change', scheduleRender);
+  });
+  sizeInput.addEventListener('input', scheduleRender);
+  hideDotsToggle.addEventListener('change', scheduleRender);
+
+  [fgColor, fgColor2, bgColor].forEach(function (el) {
+    el.addEventListener('input', function () {
+      updateColorLabels();
+      markCustom();
+      scheduleRender();
+    });
+  });
+
+  gradientToggle.addEventListener('change', function () {
+    gradientEndField.style.display = gradientToggle.checked ? 'block' : 'none';
+    markCustom();
+    scheduleRender();
+  });
+
+  presetButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.dataset.preset === 'custom') {
+        setPresetActive('custom');
+        return;
+      }
+      applyPreset(btn.dataset.preset);
+    });
+  });
+
+  fileDrop.addEventListener('click', function () { logoInput.click(); });
+
+  logoInput.addEventListener('change', function (e) {
+    var file = e.target.files && e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      logoDataUrl = evt.target.result;
+      logoPreviewImg.src = logoDataUrl;
+      logoPreviewName.textContent = file.name;
+      logoPreview.style.display = 'flex';
+      fileDrop.style.display = 'none';
+      render();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  logoRemoveBtn.addEventListener('click', function () {
+    logoDataUrl = null;
+    logoInput.value = '';
+    logoPreview.style.display = 'none';
+    fileDrop.style.display = 'block';
+    render();
+  });
+
+  document.querySelectorAll('.downloads button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!qrCode) return;
+      var format = btn.dataset.format;
+      qrCode.download({ name: 'shugs-cakes-qr', extension: format });
+    });
+  });
+
+  updateColorLabels();
+  render();
+})();
+</script>
+</body>
+</html>
